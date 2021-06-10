@@ -1,9 +1,8 @@
 from django.shortcuts import render, HttpResponse
-from languages.models import Lesson, Language, Content, Module
-
+from languages.models import Language, Lesson, Module, Content
 
 # Create your views here.
 
-def home(request):
+def homepage(request):
     #return HttpResponse("This is my homepage(/)")
-    return render(request,'home.html')
+    return render(request,'homepage.html')

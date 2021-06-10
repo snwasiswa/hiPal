@@ -8,6 +8,6 @@ admin.site.site_title = "Welcome to hiPal's Dashboard"
 admin.site.index_title = "Welcome to the Portal"
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.homepage, name='homepage'),
 
 ]
