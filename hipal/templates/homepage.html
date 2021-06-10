@@ -22,7 +22,7 @@
 <body
     style="background-image: url('static/images/bg_image.jpg'); background-size: 100% 100%;background-attachment: fixed;">
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand text-light" href="/">IBibliotheca</a>
+        <a class="navbar-brand text-light" href="/">hiPal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,40 +30,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-light" href="/home">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-light" href="/about">About<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/categories">Categories</a>
+                    <a class="nav-link" href="/language">Learn a language</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/audiobook">Audiobook</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/pdf">Pdfs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/allbooks">All books</a>
+                    <a class="nav-link" href="/blog">Blog</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <div class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Log in</button>
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Sign up</button>
+            </div>
         </div>
     </nav>
-    <div class="container my-3 pt-5 pb-3">
-        <div class="row-fluid text-center">
-            <img class="bd-placeholder-img rounded-circle" width="250" height="280"
-                src="{% static 'images/libraryhome.jpg' %}" preserveAspectRatio="xMidYMid slice" focusable="false"
-                role="img" aria-label="Placeholder: 140x140">
-            <title>Placeholder</title>
-            <rect width="100%" height="100%" fill="#777" /></img>
-        </div>
+    <div class="id">
+        <p>This is where the rest of data goes...</p>
     </div>
     <footer class=" text-center">
         <p class="py-3 my-0">
-            © 2021 IBibliotheca
+            © 2021 hiPal
         </p>
     </footer>
 

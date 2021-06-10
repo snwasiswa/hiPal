@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
-
+from .fields import OrderOfField
 
 # Create your models here.
 class Language(models.Model):
@@ -37,9 +37,13 @@ class Module(models.Model):
     language = models.ForeignKey(Lesson, related_name='modules', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
+    order = OrderOfField(blank=True, for_fields=['lesson'])
 
     def __str__(self):
-        return self.title
+        return f'{self.order}. {self.title}'
+
+    class Meta:
+        ordering = ['order']
 
 
 class Content(models.Model):
@@ -51,6 +55,10 @@ class Content(models.Model):
     module = models.ForeignKey(Module, related_name='contents', on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     item = GenericForeignKey('content_type', 'object_id')
+    order = OrderOfField(blank=True, for_fields=['module'])
+
+    class Meta:
+        ordering = ['order']
 
 
 class BaseModel(models.Model):
@@ -86,3 +94,4 @@ class Video(BaseModel):
     """This is the model for a video"""
     file = models.FileField(upload_to='videos')
     url = models.URLField()
+
