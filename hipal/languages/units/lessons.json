@@ -1,0 +1,26 @@
+[
+{
+  "model": "languages.language",
+  "pk": 1,
+  "fields": {
+    "title": "French",
+    "slug": "french"
+  }
+},
+{
+  "model": "languages.language",
+  "pk": 2,
+  "fields": {
+    "title": "Korean",
+    "slug": "korean"
+  }
+},
+{
+  "model": "languages.language",
+  "pk": 3,
+  "fields": {
+    "title": "Spanish",
+    "slug": "spanish"
+  }
+}
+]
