@@ -14,8 +14,7 @@
     <!--Incorporated CSS-->
     <link rel="stylesheet" href="{%static 'css/styles.css'%}" type="text/css">
 
-
-    <title>HomePage</title>
+    <title>Home</title>
 </head>
 
 
@@ -45,7 +44,43 @@
         </div>
     </nav>
     <div class="id">
-        <p>This is where the rest of data goes...</p>
+        <h1>Log in to hiPal</h1>
+        <div>
+            {% if form.errors %}
+            <p>Password or username didn't match. Please enter correct password or username.</p>
+            {% else %}
+            {% endif %}
+            <div>
+                <form action="{% url 'login' %} %" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your full name"
+                            required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
+                            required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone number</label>
+                        <input type="phone" class="form-control" id="phone" name="phone"
+                            placeholder="Your phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Your message</label>
+                        <textarea class="form-control" id="desc" name="desc" rows="4" required="required"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary ">Submit</button>
+                </form>
+            </div>
+
+        </div>
     </div>
     <footer class=" text-center">
         <p class="py-3 my-0">
