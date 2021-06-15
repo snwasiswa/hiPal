@@ -95,3 +95,5 @@ class Video(BaseModel):
     file = models.FileField(upload_to='videos')
     url = models.URLField()
 
+
+
