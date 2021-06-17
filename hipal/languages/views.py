@@ -16,8 +16,15 @@ class LessonListView(ListView):
         queryset = super().get_queryset()
         return queryset.filter(owner=self.request.user)
 
+class CreatorMixin(object):
+    def get_queryset(self):
+        """Allows to only display or update the lesson created"""
+        queryset = super().get_queryset()
+        return queryset.filter(owner=self.request.user)
+
 
 def homepage(request):
     #return HttpResponse("This is my homepage(/)")
     return render(request, 'homepage.html')
+
 
