@@ -14,25 +14,25 @@ class LessonListView(ListView):
     def get_queryset(self):
         """Allows to only display or update the lesson created"""
         queryset = super().get_queryset()
-        return queryset.filter(owner=self.request.creator)
+        return queryset.filter(creator = self.request.user)
 
 
 class CreatorMixin(object):
     def get_queryset(self):
         """Allows to only display or update the lesson created"""
         queryset = super().get_queryset()
-        return queryset.filter(owner=self.request.creator)
+        return queryset.filter(creator = self.request.user)
 
 
 class EditableCreatorMixin(object):
     def validate(self, form):
-        form.instance.owner = self.request.creator
+        form.instance.creator = self.request.user
         return super().validate(form)
 
 
 class CreatorLessonMixin(CreatorMixin):
     model = Lesson
-    fields = ['slug', 'title', 'overview', 'language']
+    fields = ['language', 'title','slug','overview','created_on']
     success_url = reverse_lazy('manage_lesson')
 
 
