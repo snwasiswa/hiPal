@@ -2,6 +2,27 @@
 
 @import url(//fonts.googleapis.com/css?family=Roboto:500,300,400);
 
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Bold-webfont.woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular-webfont.woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Light-webfont.woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
 html, body {
     height: 100%;
 }
@@ -9,6 +30,7 @@ html, body {
 h1,h2,h3,h4,h5, h6 {
     font-weight: bold;
     font-family:'Roboto', sans-serif;
+
 
 }
 

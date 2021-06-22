@@ -7,16 +7,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
 
     <!--Incorporated CSS-->
     <link rel="stylesheet" href="{%static 'css/styles.css'%}" type="text/css">
 
-    <title>Home</title>
+    <title>{% block title %}Log in{% endblock %}</title>
 </head>
-
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -45,41 +42,15 @@
     </nav>
     <div class="id">
         <h1>Log in to hiPal</h1>
-        <div>
-            {% if form.errors %}
-            <p>Password or username didn't match. Please enter correct password or username.</p>
-            {% else %}
-            {% endif %}
-            <div>
-                <form action="{% url 'login' %} %" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Your full name"
-                            required="required">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"
-                            required="required">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone number</label>
-                        <input type="phone" class="form-control" id="phone" name="phone"
-                            placeholder="Your phone number">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Your message</label>
-                        <textarea class="form-control" id="desc" name="desc" rows="4" required="required"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary ">Submit</button>
-                </form>
-            </div>
-
+            <ul class="menu">
+                {% if request.user.is_authenticated %}
+                <li><a href = "{% url 'logout' %}">Sign out</a>
+                </li>
+                {% else %}
+                <li><a href = "{% url 'login'%}">Sign in</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
     </div>
     <footer class=" text-center">
@@ -100,6 +71,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          {% block domready %}
+          {% endblock %}
+          });
+    </script>
 </body>
 
 </html>

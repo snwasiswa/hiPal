@@ -14,17 +14,48 @@ class LessonListView(ListView):
     def get_queryset(self):
         """Allows to only display or update the lesson created"""
         queryset = super().get_queryset()
-        return queryset.filter(owner=self.request.user)
+        return queryset.filter(owner=self.request.creator)
+
 
 class CreatorMixin(object):
     def get_queryset(self):
         """Allows to only display or update the lesson created"""
         queryset = super().get_queryset()
-        return queryset.filter(owner=self.request.user)
+        return queryset.filter(owner=self.request.creator)
+
+
+class EditableCreatorMixin(object):
+    def validate(self, form):
+        form.instance.owner = self.request.creator
+        return super().validate(form)
+
+
+class CreatorLessonMixin(CreatorMixin):
+    model = Lesson
+    fields = ['slug', 'title', 'overview', 'language']
+    success_url = reverse_lazy('manage_lesson')
+
+
+class EditableCreatorMixinLesson(CreatorLessonMixin, EditableCreatorMixin):
+    template_name = 'languages/manage/lesson/list.html'
+
+
+class ManageLessonView(CreatorLessonMixin, ListView):
+    template_name = 'languages/manage/lesson/list'
+
+
+class LessonCreateView(EditableCreatorMixinLesson, CreateView):
+    pass
+
+
+class LessonUpdateView(EditableCreatorMixinLesson, UpdateView):
+    pass
+
+
+class LessonDeleteView(CreatorLessonMixin, DeleteView):
+    template_name = 'languages/manage/lesson/delete_lesson.list'
 
 
 def homepage(request):
-    #return HttpResponse("This is my homepage(/)")
+    # return HttpResponse("This is my homepage(/)")
     return render(request, 'homepage.html')
-
-
