@@ -1,86 +1,37 @@
 <!doctype html>
 <html lang="en">
+{% extends "base.html" %}
 {% load static %}
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{%static 'css/styles.css'%}" type="text/css">
-
-    <title>{% block title %}Log in{% endblock %}</title>
+    <title>{% block title %}List of lessons{% endblock %}</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand text-secondary" href="/">hiPal</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link text-secondary" href="/about">About<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-secondary" href="/language">Learn a language</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-secondary" href="/blog">Blog</a>
-                </li>
-            </ul>
-            <div class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Log in</button>
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Sign up</button>
-            </div>
+
+{% block content %}
+<div>
+    <h1>Lessons</h1>
+    <div class="module">
+        {% for lesson in object_list %}
+        <div class="info-lesson">
+            <h3>{{ lesson.title }}</h3>
+            <p>
+                <a href="{% url 'update_lesson' lesson.id %}">Update</a>
+                <a href="{% url 'delete_lesson' lesson.id %}">Delete</a>
+            </p>
         </div>
-    </nav>
-    <div class="id">
-        <h1>Log in to hiPal</h1>
-            <ul class="menu">
-                {% if request.user.is_authenticated %}
-                <li><a href = "{% url 'logout' %}">Sign out</a>
-                </li>
-                {% else %}
-                <li><a href = "{% url 'login'%}">Sign in</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-    <footer class=" text-center">
-        <p class="py-3 my-0">
-            © 2021 hiPal
+        {% empty %}
+        <p>You don't have any created lessons</p>
+        {% endfor %}
+        <p>
+            <a href="{% url 'created_lessons' %}" class="btn btn-outline-primary my-2 my-sm-0">Create new lesson</a>
         </p>
-    </footer>
+    </div>
+</div>
+{% endblock %}
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-          {% block domready %}
-          {% endblock %}
-          });
-    </script>
 </body>
 
 </html>
