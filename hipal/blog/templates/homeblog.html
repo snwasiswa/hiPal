@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-{% load static %}
 
 <head>
     <!-- Required meta tags -->
@@ -12,9 +11,10 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{%static 'css/styles.css'%}" type="text/css">
+    {% load static %}
+    <link  href="{% static 'css/blog/styles.css' %}" rel="stylesheet" type="text/css">
 
-    <title>{% block title %}Base{% endblock %}</title>
+    <title>{% block title %}My Posts{% endblock %}</title>
 </head>
 
 <body>
@@ -51,12 +51,16 @@
         </div>
     </nav>
     <div class="id text-center">
-        <h1>Log in to hiPal</h1>
+        <h1>Welcome to your Blog</h1>
     </div>
     <div id = "content">
         {% block content %}
         {% endblock %}
     </div>
+    </div>
+    <div id="sidebar">
+        <h2>My hiPal blog posts</h2>
+        <p>This is a try</p>
     </div>
     <footer class=" text-center">
         <p class="py-3 my-0">
