@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <title>{% block title %}Form of registration{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+<div>
+    {% if object %}
+    <h1>Edit lesson "{{ object.title}}"
+    {% else %}
+    Create a new lesson
+    {% endif %}
+    </h1>
+</div>
+<div class="module">
+    <h2>Information about lesson</h2>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+{% endblock %}
+</body>
+</html>

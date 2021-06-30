@@ -19,9 +19,9 @@
             {% endif %}
             <div>
                 <form action="{% url 'login' %} %" method="post" class="form-group">
-                    {{form.as_p}}
+                    {{ form.as_p }}
                     {% csrf_token %}
-                    <input type="hidden"  name="next" value="{{ next }}" required="required" />
+                    <input type="hidden"  name="next" value="{{ next }}"/>
                     <button type="submit" class="btn btn-primary" value="Log-in">Log in</button>
                     <p>Don't have an account.</p>
                     <button type="submit" class="btn btn-primary">Sign up</button>
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-    {% endblock %}
+       {% endblock %}
 
 </body>
 

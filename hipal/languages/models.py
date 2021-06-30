@@ -18,11 +18,11 @@ class Language(models.Model):
 
 
 class Lesson(models.Model):
-    """Model for the lesson"""
+    """Model for the languages"""
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     creator = models.ForeignKey(User, related_name='lessons_created', on_delete=models.CASCADE)
-    language = models.ForeignKey(Language, related_name='lessons', on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, related_name='languages', on_delete=models.CASCADE)
     overview = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -37,7 +37,7 @@ class Module(models.Model):
     language = models.ForeignKey(Lesson, related_name='modules', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    order = OrderOfField(blank=True, for_fields=['lesson'])
+    order = OrderOfField(blank=True, for_fields=['languages'])
 
     def __str__(self):
         return f'{self.order}. {self.title}'

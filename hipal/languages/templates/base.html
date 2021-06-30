@@ -12,13 +12,13 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{%static 'css/styles.css'%}" type="text/css">
+    <link rel="stylesheet" href="{%static 'css/languages.css'%}" type="text/css">
 
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <h5 class="navbar-brand text-primary" href="/">hiPal</h5>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@
                 <button class="btn btn-outline-primary my-2 my-sm-0" href = "{% url 'logout' %}">Sign out</button>
 
                 {% else %}
-                <button class="btn btn-outline-primary my-2 my-sm-0" href = "{% url 'login'%}">Sign in</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0" href = "{% url 'login' %}">Sign in</button>
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign up</button>
                 {% endif %}
 

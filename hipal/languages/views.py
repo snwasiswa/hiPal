@@ -8,19 +8,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 
 # Create your views here.
 class LessonListView(ListView):
-    """View for the list of lessons"""
+    """View for the list of languages"""
     model = Lesson
     template_name = 'languages/management/lesson/list_lesson.html'
 
     def get_queryset(self):
-        """Allows to only display or update the lesson created"""
+        """Allows to only display or update the languages created"""
         queryset = super().get_queryset()
         return queryset.filter(creator=self.request.user)
 
 
 class CreatorMixin(object):
     def get_queryset(self):
-        """Allows to only display or update the lesson created"""
+        """Allows to only display or update the languages created"""
         queryset = super().get_queryset()
         return queryset.filter(creator=self.request.user)
 
@@ -38,7 +38,7 @@ class CreatorLessonMixin(CreatorMixin, LoginRequiredMixin, PermissionRequiredMix
 
 
 class EditableCreatorMixinLesson(CreatorLessonMixin, EditableCreatorMixin):
-    template_name = 'languages/management/lesson/list_lesson.html'
+    template_name = 'languages/management/lesson/form.html'
 
 
 class ManageLessonView(CreatorLessonMixin, ListView):
