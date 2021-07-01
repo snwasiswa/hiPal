@@ -34,7 +34,7 @@ class EditableCreatorMixin(object):
 class CreatorLessonMixin(CreatorMixin, LoginRequiredMixin, PermissionRequiredMixin):
     model = Lesson
     fields = ['language', 'title', 'slug', 'overview', 'created_on']
-    success_url = reverse_lazy('manage_lesson')
+    success_url = reverse_lazy('lessons_list')
 
 
 class EditableCreatorMixinLesson(CreatorLessonMixin, EditableCreatorMixin):

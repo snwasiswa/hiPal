@@ -18,15 +18,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
-from django.contrib.auth import views as auth_views
+from django.contrib.auth import views
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('languages/', include('languages.urls')),
+                  path('', include('languages.urls')),
                   path('blog/', include('blog.urls')),
-                  # path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
-                  # path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
-                  path('accounts/', include('django.contrib.auth.urls')),
-                  path('', TemplateView.as_view(template_name='login.html'), name='login'),
+                  path('accounts/login/', views.LoginView.as_view(), name='login'),
+                  path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
+
+                  #path('accounts/', include('django.contrib.auth.urls')),
+                  #path('', TemplateView.as_view(template_name='registration/login.html'), name='login'),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
