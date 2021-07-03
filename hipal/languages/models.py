@@ -26,6 +26,7 @@ class Lesson(models.Model):
     language = models.ForeignKey(Language, related_name='languages', on_delete=models.CASCADE)
     overview = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
+    student = models.ManyToManyField(User, related_name='lessons_joined', blank=True)
 
     class Meta:
         ordering = ['-created_on']

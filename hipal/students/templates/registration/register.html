@@ -29,11 +29,11 @@
         </div>
 
         <div class="col-sm my-3 pb-5 pt-5 bg-light text-dark">
-            <p class="text-center>Please fill out the form below</p>
-          <form action="/contact" method="post">
+            <p class="text-center">Please fill out the form below</p>
+          <form method="post">
             {% csrf_token %}
               {{form.as_p}}
-            <button type="submit" class="btn btn-primary text-center">Create New Account</button>
+            <button type="submit" class="btn btn-primary">Create New Account</button>
           </form>
         </div>
 
