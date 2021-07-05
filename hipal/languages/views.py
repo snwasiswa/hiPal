@@ -1,9 +1,11 @@
 from django.shortcuts import render, HttpResponse
+from django.views.generic import DetailView
 from .models import Language, Lesson, Module, Content
 from django.views.generic.list import ListView
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from students.forms import StudentEnrollment
 
 
 # Create your views here.
@@ -62,3 +64,15 @@ class LessonDeleteView(CreatorLessonMixin, DeleteView):
 def homepage(request):
     # return HttpResponse("This is my homepage(/)")
     return render(request, 'homepage.html')
+
+
+class LessonDetailView(DetailView):
+    model = Lesson
+    template_name = 'languages/lesson/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['enroll_form'] = StudentEnrollment(initial={'lesson': self.object})
+        return context
+
+

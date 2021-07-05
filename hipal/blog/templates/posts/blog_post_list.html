@@ -15,7 +15,7 @@
     <h2>
         <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
     </h2>
-    <p class="date">Published {{ post.published_date}} by {{ post.author }}</p>
+    <p class="date">Posted on {{ post.published_date}} by {{ post.author }}</p>
     {{ post.post_body | truncatewords:40 | linebreaks }}
     {% endfor %}
 </div>

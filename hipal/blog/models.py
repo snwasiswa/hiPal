@@ -5,9 +5,8 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-
 class PublishedPostManager(models.Manager):
-    """Custom Blog Post Manager to manage to posts"""
+    """Custom Blog Post Manager to manage posts"""
 
     def get_queryset(self):
         return super(PublishedPostManager, self).get_queryset().filter(status='published')
@@ -18,7 +17,7 @@ class BlogPost(models.Model):
     # Define all the necessary fields
     CHOICES = (('draft', 'Draft'), ('published', 'Published'))
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250)
+    slug = models.SlugField(max_length=250, unique_for_date='published_date')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     blog_body = models.TextField()
     published_date = models.DateTimeField(default=timezone.now)
@@ -26,7 +25,7 @@ class BlogPost(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=15, choices=CHOICES, default='draft')
     objects = models.Manager()
-    published = PublishedPostManager()
+    objects_published = PublishedPostManager()
 
     class Meta:
         ordering = ('-published_date',)
@@ -36,9 +35,7 @@ class BlogPost(models.Model):
 
     def get_absolute_url(self):
         """Set canonical url for the blog app"""
-        return reverse('blog :blog_post_detail', args=[self.published.year,
-                                                       self.published.month,
-                                                       self.published.day,
-                                                       self.slug])
-
-
+        return reverse('blog:blog_post_detail', args=[self.published_date.year,
+                                                      self.published_date.month,
+                                                      self.published_date.day,
+                                                      self.slug])
