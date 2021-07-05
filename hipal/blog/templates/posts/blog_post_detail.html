@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %} {{ post.title} {% endblock %}</title>
 </head>
 <body>
+    {% block content %}
+    <div>
+        <h1>{{ post.title }}</h1>
+        <p>
+            Posted on {{ post.published_date }} by {{ post.author }}
+        </p>
+        {{ post.body_post|linebreaks }}
+    </div>
+    {% endblock %}
 
 </body>
 </html>

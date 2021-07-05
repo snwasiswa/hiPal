@@ -9,6 +9,7 @@
 
 <body>
 {% block content %}
+
 <div>
     <h1 class="text-center">My Posts</h1>
     {% for post in posts %}
@@ -18,7 +19,9 @@
     <p class="date">Posted on {{ post.published_date}} by {{ post.author }}</p>
     {{ post.post_body | truncatewords:40 | linebreaks }}
     {% endfor %}
+    {% include "pagination.html" with page=posts %}
 </div>
+
 {% endblock %}
 
 </body>
