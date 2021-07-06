@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 
 # Create your models here.
@@ -26,6 +27,7 @@ class BlogPost(models.Model):
     status = models.CharField(max_length=15, choices=CHOICES, default='draft')
     objects = models.Manager()
     objects_published = PublishedPostManager()
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('-published_date',)
@@ -56,3 +58,4 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Commented by {self.name} on {self.blog_post}"
+

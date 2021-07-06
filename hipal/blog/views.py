@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from .models import BlogPost
+from .models import BlogPost, Comment
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.generic import ListView
-from .forms import EmailBlogPostForm
+from .forms import EmailBlogPostForm, PostCommentForm
 from django.core.mail import send_mail
 
 
@@ -36,12 +36,33 @@ def blog_post_list(request):
 
 def blog_post_detail(request, year, month, day, post):
     """Details for a single blog post"""
+
+    blog_post = get_object_or_404(BlogPost, slug=post,
+                                  status='published',
+                                  published_date__year=year,
+                                  published_date__month=month,
+                                  published_date__day=day)
+    # Comments on the post
+    post_comments = blog_post.comments.filter(active=True)
+    comment_post = None
+
+    if request.method == 'POST':
+        # Comment has been posted
+        post_comment_form = PostCommentForm(data=request.POST)
+        if post_comment_form.is_valid():
+            # Create comment object without saving it to database
+            comment_post = post_comment_form.save(commit=False)
+            comment_post.blog_post = blog_post # Assign current comment to comment
+            comment_post.save() # Save to database
+    else:
+        post_comment_form = PostCommentForm()
+
     # Return HTTp response
-    return render(request, 'posts/blog_post_detail.html', {'post': get_object_or_404(BlogPost, slug=post,
-                                                                                     status='published',
-                                                                                     published_date__year=year,
-                                                                                     published_date__month=month,
-                                                                                     published_date__day=day)})
+    return render(request, 'posts/blog_post_detail.html', {'post': blog_post,
+                                                           'comments': post_comments,
+                                                           'comment_post': comment_post,
+                                                           'post_comment_form': post_comment_form
+                                                           })
 
 
 def sharing_post(request, blog_post_id):
@@ -57,7 +78,7 @@ def sharing_post(request, blog_post_id):
             post_url = request.build_absolute_uri(blog_post.get_absolute_url())
             subject = f"You have a recommendation to read {blog_post.title} from {cd['name']}"
             message = f"Read {blog_post.title} at {post_url}\n\n {cd['name']}\'s comments: {cd['comments']}"
-            send_mail(subject, message, 'stevewasiswa@gmail.com', [cd['recipients']])
+            send_mail(subject, message, 'stewartvas01@gmail.com', [cd['recipients']])
             send_post = True
 
     else:
