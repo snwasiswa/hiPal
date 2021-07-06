@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "homeblog.html" %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Share a post {% endblock %}</title>
+</head>
+<body>
+<div>
+    {% block content %}
+    {% if sent %}
+    <h1>E-mail successfully sent</h1>
+    <p>
+        "{{ blog_post.title }}" has successfully been sent to {{ form.cleaned_data.to }}.
+    </p>
+    {% else %}
+    <h1>Share Post "{{ blog_post.title }}" by e-mail</h1>
+    <form method="post">
+        {{ form.as_ul }}
+        {% csrf_token %}
+        <button type="submit" value="Send e-mail">Send e-mail</button>
+    </form>
+    {% endif %}
+    {% endblock %}
+</div>
+</body>
+</html>

@@ -1,13 +1,24 @@
 from django.shortcuts import render, get_object_or_404
 from .models import BlogPost
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.views.generic import ListView
+from .forms import EmailBlogPostForm
+from django.core.mail import send_mail
 
 
 # Create your views here.
+class BlogPostListView(ListView):
+    """View for the list of posts"""
+    queryset = BlogPost.objects_published.all()
+    context_object_name = 'posts'
+    paginate_by = 4
+    template_name = 'posts/blog_post_list.html'
+
+
 def blog_post_list(request):
-    """Views for all the posts"""
+    """View of all the posts"""
     # Create Paginator object
-    paginate_posts = Paginator(BlogPost.objects_published.all(), 3)
+    paginate_posts = Paginator(BlogPost.objects_published.all(), 4)
     page = request.GET.get('page')
     try:
         posts = paginate_posts.page(page)
@@ -31,3 +42,26 @@ def blog_post_detail(request, year, month, day, post):
                                                                                      published_date__year=year,
                                                                                      published_date__month=month,
                                                                                      published_date__day=day)})
+
+
+def sharing_post(request, blog_post_id):
+    """View to handle the sharing posts functionality"""
+    blog_post = get_object_or_404(BlogPost, id=blog_post_id, status='published')  # Retrieve posts by id
+    send_post = False
+    if request.method == 'POST':
+        # Form has been submitted
+        sharing_form = EmailBlogPostForm(request.POST)
+        # Check validation of fields
+        if sharing_form.is_valid():
+            cd = sharing_form.cleaned_data
+            post_url = request.build_absolute_uri(blog_post.get_absolute_url())
+            subject = f"You have a recommendation to read {blog_post.title} from {cd['name']}"
+            message = f"Read {blog_post.title} at {post_url}\n\n {cd['name']}\'s comments: {cd['comments']}"
+            send_mail(subject, message, 'stevewasiswa@gmail.com', [cd['recipients']])
+            send_post = True
+
+    else:
+        sharing_form = EmailBlogPostForm()
+
+    # Return HTTP response
+    return render(request, 'posts/sharing_post.html', {'post': blog_post, 'form': sharing_form, 'sent': send_post})

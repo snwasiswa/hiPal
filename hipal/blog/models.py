@@ -39,3 +39,20 @@ class BlogPost(models.Model):
                                                       self.published_date.month,
                                                       self.published_date.day,
                                                       self.slug])
+
+
+class Comment(models.Model):
+    """Model for the comments on posts"""
+    blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
+    name = models.CharField(max_length=100)
+    body = models.TextField()
+    email = models.EmailField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created_date', )
+
+    def __str__(self):
+        return f"Commented by {self.name} on {self.blog_post}"

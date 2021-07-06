@@ -12,6 +12,9 @@
             Posted on {{ post.published_date }} by {{ post.author }}
         </p>
         {{ post.body_post|linebreaks }}
+        <p>
+            <a href="{% url 'blog:sharing_post' post.id %}">Share</a>
+        </p>
     </div>
     {% endblock %}
 
