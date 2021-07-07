@@ -39,6 +39,16 @@
             <button type="submit" value="Send e-mail" >Add comment</button>
         </form>
         {% endif %}
+        <div>
+            <h2>Most similar</h2>
+            {% for post in identical_posts %}
+            <p>
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </p>
+            {% empty %}
+            No similar or identical posts yet
+            {% endfor %}
+        </div>
     </div>
     {% endblock %}
 </body>

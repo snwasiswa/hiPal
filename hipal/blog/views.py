@@ -4,6 +4,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.generic import ListView
 from .forms import EmailBlogPostForm, PostCommentForm
 from django.core.mail import send_mail
+from taggit.models import Tag
+from django.db.models import Count
 
 
 # Create your views here.
@@ -15,10 +17,16 @@ class BlogPostListView(ListView):
     template_name = 'posts/blog_post_list.html'
 
 
-def blog_post_list(request):
+def blog_post_list(request, slug_tag=None):
     """View of all the posts"""
+    tag = None
+    post_list = BlogPost.objects_published.all()
+
+    if slug_tag:
+        tag = get_object_or_404(Tag, slug=slug_tag)
+        post_list = BlogPost.objects_published.all.filter(tags_in=[tag])
     # Create Paginator object
-    paginate_posts = Paginator(BlogPost.objects_published.all(), 4)
+    paginate_posts = Paginator(post_list, 4)
     page = request.GET.get('page')
     try:
         posts = paginate_posts.page(page)
@@ -31,7 +39,8 @@ def blog_post_list(request):
 
     # Return HTTP response
     return render(request, 'posts/blog_post_list.html', {'posts': posts,
-                                                         'page': page})
+                                                         'page': page,
+                                                         'tag': tag})
 
 
 def blog_post_detail(request, year, month, day, post):
@@ -45,6 +54,12 @@ def blog_post_detail(request, year, month, day, post):
     # Comments on the post
     post_comments = blog_post.comments.filter(active=True)
     comment_post = None
+
+    # tags ids
+    post_ids = blog_post.tags.values_list('id', flat=True)
+    # Identical posts
+    identical_posts = BlogPost.objects_published.filter(tags__in=post_ids).exclude(id=blog_post.id)
+    identical_posts = identical_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-published_date')[:4]
 
     if request.method == 'POST':
         # Comment has been posted
@@ -61,7 +76,8 @@ def blog_post_detail(request, year, month, day, post):
     return render(request, 'posts/blog_post_detail.html', {'post': blog_post,
                                                            'comments': post_comments,
                                                            'comment_post': comment_post,
-                                                           'post_comment_form': post_comment_form
+                                                           'post_comment_form': post_comment_form,
+                                                           'identical_posts': identical_posts
                                                            })
 
 
