@@ -22,7 +22,7 @@ class Lesson(models.Model):
     """Model for the languages"""
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    creator = models.ForeignKey(User, related_name='lessons_created', on_delete=models.CASCADE, null=True)
+    creator = models.ForeignKey(User, related_name='lessons_created', on_delete=models.CASCADE)
     language = models.ForeignKey(Language, related_name='languages', on_delete=models.CASCADE)
     overview = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -66,7 +66,7 @@ class Content(models.Model):
 class BaseModel(models.Model):
     """Abstract model that have some fields that some models can inherit from"""
     title = models.CharField(max_length=200)
-    creator = models.ForeignKey(User, related_name='%(class) s_related', on_delete=models.CASCADE, null=True)
+    creator = models.ForeignKey(User, related_name='%(class) s_related', on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on_on = models.DateTimeField(auto_now=True)
 

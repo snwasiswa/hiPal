@@ -16,8 +16,7 @@
     <div class="module">
         {% for lesson in object_list %}
         <div class="info-lesson">
-
-            <h3>{{ lesson.title.all }}</h3>
+            <h3>{{ lesson.title }}</h3>
             <p>
                 <a href="{% url 'update_lesson' lesson.id %}">Update</a>
                 <a href="{% url 'delete_lesson' lesson.id %}">Delete</a>

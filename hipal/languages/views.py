@@ -28,9 +28,9 @@ class CreatorMixin(object):
 
 
 class EditableCreatorMixin(object):
-    def validate(self, form):
+    def form_valid(self, form):
         form.instance.creator = self.request.user
-        return super().validate(form)
+        return super().form_valid(form)
 
 
 class CreatorLessonMixin(CreatorMixin, LoginRequiredMixin, PermissionRequiredMixin):
@@ -57,7 +57,7 @@ class LessonUpdateView(EditableCreatorMixinLesson, UpdateView):
 
 
 class LessonDeleteView(CreatorLessonMixin, DeleteView):
-    template_name = 'languages/management/lesson/delete_lesson.list'
+    template_name = 'languages/management/lesson/delete_lesson.html'
     permission_required = 'languages.delete_lesson'
 
 
