@@ -18,7 +18,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
         <a class="navbar-brand text-primary" href="/">hiPal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,11 +46,11 @@
                 <a class="btn btn-outline-primary my-2 my-sm-0" href = "{% url 'login' %}">Sign in</a>
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign up</button>
                 {% endif %}
-
-
             </div>
         </div>
+        </div>
     </nav>
+
     <div class="id text-center">
         <h1>Log in to hiPal</h1>
     </div>

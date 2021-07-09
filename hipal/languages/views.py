@@ -1,11 +1,13 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.views.generic import DetailView
-from .models import Language, Lesson, Module, Content
+from .models import Language, Lesson, Unit, Content
 from django.views.generic.list import ListView
+from django.views.generic.base import TemplateResponseMixin, View
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from students.forms import StudentEnrollment
+from .forms import UnitFormSet
 
 
 # Create your views here.
@@ -76,3 +78,25 @@ class LessonDetailView(DetailView):
         return context
 
 
+class LessonUnitUpdateView(TemplateResponseMixin, View):
+    Lesson = None
+    template_name = 'languages/management/unit/formset.html'
+
+    def get_formset(self, data=None):
+        return UnitFormSet(instance=self.lesson, data=data)
+
+    def dispatch(self, pk, request):
+        self.lesson = get_object_or_404(Lesson, id=pk, creator=request.user)
+        return super().dispatch(pk, request)
+
+    def get(self, request, *args, **kwargs):
+        return self.render_to_response({'lesson': self.lesson,
+                                        'formset': self.get_formset()})
+
+    def post(self, request, *args, **kwargs):
+        formset = self.get_formset(data=request.POST)
+        if formset.is_valid():
+            formset.save()
+            return redirect('lessons_list')
+        return self.render_to_response({'lesson': self.lesson,
+                                        'formset': formset})

@@ -11,15 +11,15 @@
 <body>
 
 {% block content %}
-<div>
+<div class="text-center">
     <h1>Lessons List</h1>
-    <div class="module">
+    <div>
         {% for lesson in object_list %}
         <div class="info-lesson">
             <h3>{{ lesson.title }}</h3>
             <p>
-                <a href="{% url 'update_lesson' lesson.id %}">Update</a>
-                <a href="{% url 'delete_lesson' lesson.id %}">Delete</a>
+                <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'update_lesson' lesson.id %}">Update</a>
+                <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'delete_lesson' lesson.id %}">Delete</a>
             </p>
         </div>
         {% empty %}
@@ -31,6 +31,7 @@
     </div>
 </div>
 {% endblock %}
+
 
 </body>
 

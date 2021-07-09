@@ -35,7 +35,7 @@ class Lesson(models.Model):
         return self.title
 
 
-class Module(models.Model):
+class Unit(models.Model):
     language = models.ForeignKey(Lesson, related_name='modules', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
@@ -54,7 +54,7 @@ class Content(models.Model):
                                                                                                             'text',
                                                                                                             'image',
                                                                                                             'file')})
-    module = models.ForeignKey(Module, related_name='contents', on_delete=models.CASCADE)
+    module = models.ForeignKey(Unit, related_name='contents', on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     item = GenericForeignKey('content_type', 'object_id')
     order = OrderOfField(blank=True, for_fields=['module'])
