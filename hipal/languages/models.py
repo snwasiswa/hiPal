@@ -36,10 +36,10 @@ class Lesson(models.Model):
 
 
 class Unit(models.Model):
-    language = models.ForeignKey(Lesson, related_name='modules', on_delete=models.CASCADE)
+    language = models.ForeignKey(Lesson, related_name='units', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    order = OrderOfField(blank=True, for_fields=['languages'])
+    order = OrderOfField(blank=True, for_fields=['language'])
 
     def __str__(self):
         return f'{self.order}. {self.title}'
@@ -54,10 +54,10 @@ class Content(models.Model):
                                                                                                             'text',
                                                                                                             'image',
                                                                                                             'file')})
-    module = models.ForeignKey(Unit, related_name='contents', on_delete=models.CASCADE)
+    unit = models.ForeignKey(Unit, related_name='contents', on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     item = GenericForeignKey('content_type', 'object_id')
-    order = OrderOfField(blank=True, for_fields=['module'])
+    order = OrderOfField(blank=True, for_fields=['unit'])
 
     class Meta:
         ordering = ['order']
@@ -68,7 +68,7 @@ class BaseModel(models.Model):
     title = models.CharField(max_length=200)
     creator = models.ForeignKey(User, related_name='%(class) s_related', on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
-    updated_on_on = models.DateTimeField(auto_now=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True

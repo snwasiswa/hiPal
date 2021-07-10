@@ -18,15 +18,16 @@
         <div class="info-lesson">
             <h3>{{ lesson.title }}</h3>
             <p>
-                <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'update_lesson' lesson.id %}">Update</a>
-                <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'delete_lesson' lesson.id %}">Delete</a>
+                <a class="btn btn-primary " href="{% url 'update_lesson' lesson.id %}">Update</a>
+                <a class="btn btn-primary " href="{% url 'delete_lesson' lesson.id %}">Delete</a>
+                <a class="btn btn-primary " href="{% url 'lessons_units' lesson.id %}">Edit Units</a>
             </p>
         </div>
         {% empty %}
         <p>You don't have any created lessons</p>
         {% endfor %}
         <p>
-            <a href="{% url 'add_lesson' %}" class="btn btn-outline-primary my-2 my-sm-0">Add new lesson</a>
+            <a href="{% url 'add_lesson' %}" class="btn btn-primary">Add new lesson</a>
         </p>
     </div>
 </div>

@@ -1,13 +1,15 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 
+
 class OrderOfField(models.PositiveIntegerField):
     """This is a class for custom order of fields"""
+
     def __init__(self, for_fields=None, *args, **kwargs):
-        """Initliaze the fields"""
+        """Initialize the fields"""
         self.for_fields = for_fields
-        super().__init__(*args,**kwargs)
-        
+        super().__init__(*args, **kwargs)
+
     def pre_save(self, model_instance, add):
         if getattr(model_instance, self.attname) is None:
             try:
