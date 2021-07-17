@@ -36,7 +36,7 @@ class Lesson(models.Model):
 
 
 class Unit(models.Model):
-    language = models.ForeignKey(Lesson, related_name='units', on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, related_name='units', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     order = OrderOfField(blank=True, for_fields=['language'])

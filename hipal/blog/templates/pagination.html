@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <!-- Required meta tags -->
+    <!-- Required meta templatetags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,27 +12,28 @@
 
     <!--Incorporated CSS-->
     {% load static %}
-    <link  href="{% static 'css/blog.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet" type="text/css">
     <title>Pagination</title>
 </head>
-<body>
-<div>
-    <span>
 
-        {% if page.has_previous %}
-        <a href="?page={{ page.previous_page_number }}" class="text-right">Previous</a>
+<body>
+    <div>
         <span>
-            Page {{ page.number}} of {{ page.paginator.num_pages}}
+
+            {% if page.has_previous %}
+            <a href="?page={{ page.previous_page_number }}" class="text-right">Previous</a>
+            <span>
+                Page {{ page.number}} of {{ page.paginator.num_pages}}
+            </span>
+            {% elif page.has_next %}
+            <span>
+                Page {{ page.number}} of {{ page.paginator.num_pages}}
+            </span>
+            <a href="?page={{ page.next_page_number }}" class="text-right">Next</a>
+            {% endif %}
         </span>
-        {% elif page.has_next %}
-        <span>
-            Page {{ page.number}} of {{ page.paginator.num_pages}}
-        </span>
-        <a href="?page={{ page.next_page_number }}" class="text-right">Next</a>
-        {% endif %}
-    </span>
-</div>
-   <!-- Optional JavaScript -->
+    </div>
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -45,10 +47,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-          {% block domready %}
-          {% endblock %}
-          });
+        $(document).ready(function () {
+            {% block domready %}
+            {% endblock %}
+        });
     </script>
 </body>
+
 </html>

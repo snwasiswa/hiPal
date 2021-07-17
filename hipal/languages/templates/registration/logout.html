@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 {% extends "base.html" %}
@@ -8,7 +7,7 @@
 
 <head>
 
-     <title>{% block title %}Log out{% endblock %}</title>
+    <title>{% block title %}Log out{% endblock %}</title>
 </head>
 
 
@@ -17,9 +16,9 @@
     {% block content %}
     <div class="id">
         <h1>Logged out from hiPal</h1>
-            <div >
-               <p>You have successfully logged out. You can <a href="{% url 'login' %}">Log in again</a>.</p>
-            </div>
+        <div>
+            <p>You have successfully logged out. You can <a href="{% url 'login' %}">Log in again</a>.</p>
+        </div>
     </div>
     {% endblock %}
 </body>

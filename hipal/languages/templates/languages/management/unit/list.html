@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "base.html" %}
+{% load lesson %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Unit {{ unit.order|add:1 }} : {{ unit.title }} {% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+    {% with lesson=unit.lesson %}
+    <h1>Lesson "{{ lesson.title }}"</h1>
+    <div class="content">
+        <h3>Units</h3>
+        <ul id="units">
+            {% for u in lesson.units.all %}
+            <li data-id="{{ unit.id }}" {% if u == unit %} class="selected" {% endif %}>
+                <a href="{% url 'unit_content_list' u.id %}">
+                    <span>Unit
+                        <span class="order">{{ u.order|add:1 }}
+                        </span>
+                    </span>
+                    <br> {{ u.title }}
+                </a>
+            </li>
+            {% empty %}
+            <li>You don't have any units yet.</li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    <div class="unit">
+        <h2>Unit {{ unit.order|add:1 }} : {{ unit.title }}</h2>
+        <h3>Unit Contents</h3>
+        <div id="unit-contents">
+            {% for content in unit.contents.all %}
+            <div data-id="{{ content.id }}">
+                {% with item=content.item %}
+                <p>
+                    {{ item }} ({{ item|model_name }})
+                </p>
+                <a href="{% url 'update_unit_content' unit.id item|model_name item.id %}">Edit</a>
+                <form action="{% url 'delete_unit_content' content.id %}" method="post">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                    {% csrf_token %}
+                </form>
+                {% endwith %}
+            </div>
+            {% empty %}
+            <p>There are no contents in the unit </p>
+            {% endfor %}
+        </div>
+        <h3> Add new content</h3>
+        <ul class="content-type">
+            <li><a href="{% url 'create_unit_content' unit.id 'file'%}">File</a></li>
+            <li><a href="{% url 'create_unit_content' unit.id 'text'%}">Text</a></li>
+            <li><a href="{% url 'create_unit_content' unit.id 'video'%}">Video</a></li>
+            <li><a href="{% url 'create_unit_content' unit.id 'image'%}">Image</a></li>
+        </ul>
+    </div>
+    {% endwith %}
+    {% endblock %}
+</body>
+
+</html>

@@ -55,11 +55,11 @@ def blog_post_detail(request, year, month, day, post):
     post_comments = blog_post.comments.filter(active=True)
     comment_post = None
 
-    # tags ids
+    # templatetags ids
     post_ids = blog_post.tags.values_list('id', flat=True)
     # Identical posts
     identical_posts = BlogPost.objects_published.filter(tags__in=post_ids).exclude(id=blog_post.id)
-    identical_posts = identical_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-published_date')[:4]
+    identical_posts = identical_posts.annotate(same_tags=Count('templatetags')).order_by('-same_tags', '-published_date')[:4]
 
     if request.method == 'POST':
         # Comment has been posted

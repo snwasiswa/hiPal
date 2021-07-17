@@ -2,27 +2,30 @@
 <html lang="en">
 {% extends 'base.html' %}
 {% load static %}
+
 <head>
     <title>{% block title %}Form of registration{% endblock %}</title>
 </head>
+
 <body>
-{% block content %}
-<div class="text-center">
-    {% if object %}
-    <h1>Edit lesson "{{ object.title}}"
-    {% else %}
-    Create a new lesson
-    {% endif %}
-    </h1>
-</div>
-<div class="text-center">
-    <h2>Information about lesson</h2>
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" class="btn btn-primary" value="Done and Save"></p>
-    </form>
-</div>
-{% endblock %}
+    {% block content %}
+    <div class="text-center">
+        {% if object %}
+        <h1>Edit lesson "{{ object.title}}"
+            {% else %}
+            Create a new lesson
+            {% endif %}
+        </h1>
+    </div>
+    <div class="text-center">
+        <h2>Information about lesson</h2>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" class="btn btn-primary" value="Done and Save"></p>
+        </form>
+    </div>
+    {% endblock %}
 </body>
+
 </html>

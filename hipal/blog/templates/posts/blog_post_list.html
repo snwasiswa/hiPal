@@ -2,39 +2,41 @@
 <html lang="en">
 {% extends "homeblog.html" %}
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} My Post list {% endblock %}</title>
 </head>
 
 <body>
-{% block content %}
+    {% block content %}
 
-<div>
-    <h1 class="text-center">My Posts</h1>
-    {% if tag %}
-    <h2>Below are the posts tagged with "{{ tag.name }}"</h2>
-    {% endif %}
-    {% for post in posts %}
-    <h2>
-        <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
-        <p class="tags">
-            Tags:
-            {% for tag in post.tags.all %}
-            <a href="{% url 'blog:blog_post_list_with_tag' tag.slug %}">
-                {{ tag.name }}
-            </a>
-            {% if not forloop.last %},
-            {% endif %}
-            {% endfor %}
-        </p>
-    </h2>
-    <p class="date">Posted on {{ post.published_date}} by {{ post.author }}</p>
-    {{ post.post_body | truncatewords:40 | linebreaks }}
-    {% endfor %}
-    {% include "pagination.html" with page=posts %}
-</div>
-{% endblock %}
+    <div>
+        <h1 class="text-center">My Posts</h1>
+        {% if tag %}
+        <h2>Below are the posts tagged with "{{ tag.name }}"</h2>
+        {% endif %}
+        {% for post in posts %}
+        <h2>
+            <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
+            <p class="tags">
+                Tags:
+                {% for tag in post.tags.all %}
+                <a href="{% url 'blog:blog_post_list_with_tag' tag.slug %}">
+                    {{ tag.name }}
+                </a>
+                {% if not forloop.last %},
+                {% endif %}
+                {% endfor %}
+            </p>
+        </h2>
+        <p class="date">Posted on {{ post.published_date}} by {{ post.author }}</p>
+        {{ post.post_body | truncatewords:40 | linebreaks }}
+        {% endfor %}
+        {% include "pagination.html" with page=posts %}
+    </div>
+    {% endblock %}
 
 </body>
+
 </html>

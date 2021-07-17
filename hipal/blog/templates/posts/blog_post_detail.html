@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} {{ post.title} {% endblock %}</title>
 </head>
+
 <body>
     {% block content %}
     <div>
@@ -36,7 +38,7 @@
         <form method="post">
             {{ post_comment_form.as_p }}
             {% csrf_token %}
-            <button type="submit" value="Send e-mail" >Add comment</button>
+            <button type="submit" value="Send e-mail">Add comment</button>
         </form>
         {% endif %}
         <div>
@@ -52,4 +54,5 @@
     </div>
     {% endblock %}
 </body>
+
 </html>

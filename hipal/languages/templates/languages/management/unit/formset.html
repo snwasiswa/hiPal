@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends "base.html" %}
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %} Edit "{{ lesson.title }}" {% endblock%}</title>
 </head>
+
 <body>
-{% block content %}
-<div class="text-center">
-    <h1>Edit "{{ lesson.title }}"</h1>
-    <div class="unit">
-        <h2>Lesson Units</h2>
-        <form method="post">
-            {{ formset }}
-            {{ formset.management_form }}
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Save Units</button>
-        </form>
+    {% block content %}
+    <div class="text-center">
+        <h1>Edit "{{ lesson.title }}"</h1>
+        <div class="unit">
+            <h2>Lesson Units</h2>
+            <form method="post">
+                {{ formset }}
+                {{ formset.management_form }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Save Units</button>
+            </form>
+        </div>
     </div>
-</div>
-{% endblock%}
+    {% endblock%}
 </body>
+
 </html>

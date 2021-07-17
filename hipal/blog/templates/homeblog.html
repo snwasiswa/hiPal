@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
+    <!-- Required meta templatetags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -12,7 +12,7 @@
 
     <!--Incorporated CSS-->
     {% load static %}
-    <link  href="{% static 'css/blog.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet" type="text/css">
 
     <title>{% block title %}My Posts{% endblock %}</title>
 
@@ -40,10 +40,10 @@
             <div class="form-inline my-2 my-lg-0">
 
                 {% if request.user.is_authenticated %}
-                <a class="btn btn-outline-primary my-2 my-sm-0" href = "{% url 'logout' %}">Sign out</a>
+                <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
 
                 {% else %}
-                <a class="btn btn-outline-primary my-2 my-sm-0" href = "{% url 'login'%}">Sign in</a>
+                <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'login'%}">Sign in</a>
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign up</button>
                 {% endif %}
 
@@ -54,7 +54,7 @@
     <div class="id text-center">
         <h1>Welcome to your Blog</h1>
     </div>
-    <div id = "content">
+    <div id="content">
         {% block content %}
         {% endblock %}
     </div>
@@ -83,10 +83,10 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-          {% block domready %}
-          {% endblock %}
-          });
+        $(document).ready(function () {
+            {% block domready %}
+            {% endblock %}
+        });
     </script>
 </body>
 

@@ -116,7 +116,7 @@ class UpdateLessonUnitView(TemplateResponseMixin, View):
 
 
 class CreateContentView(TemplateResponseMixin, View):
-    """ Helps creating and updating contents of lessons"""
+    """ Helps creating and updating lesson contents"""
     model = None
     unit = None
     object_to_create = None
@@ -139,7 +139,7 @@ class CreateContentView(TemplateResponseMixin, View):
     def dispatch(self, request, unit_id, model_name, id=None):
 
         self.model = self.get_model(model_name)
-        self.unit = get_object_or_404(Unit, id=id, creator=request.user)
+        self.unit = get_object_or_404(Unit, id=id, lesson__creator=request.user)
 
         if id:
             self.object_to_create = get_object_or_404(self.model, id=id, creator=request.user)
@@ -170,3 +170,25 @@ class CreateContentView(TemplateResponseMixin, View):
         return self.render_to_response({'form': form,
                                         'object': self.object_to_create})
 
+
+class DeleteContentView(View):
+    """Helps deleting lesson contents"""
+    def post(self, request, unit_id):
+        """Execute post requests"""
+        content = get_object_or_404(Content, id=unit_id,
+                                    unit__lesson__creator=request.user)
+        unit = content.unit
+        content.item.delete()
+        content.delete()
+        return redirect('unit_content', unit.id)
+
+
+class ContentListView(TemplateResponseMixin, View):
+    """ List View for Unit contents """
+    template_name = 'languages/management/unit/list.html'
+
+    def get(self, request, unit_id):
+        """Execute get requests"""
+        unit = get_object_or_404(Unit, id=unit_id, lesson__creator=request.user)
+        return self.render_to_response({'unit': unit
+                                        })

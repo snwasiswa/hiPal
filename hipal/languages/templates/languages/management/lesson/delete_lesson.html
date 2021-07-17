@@ -2,23 +2,26 @@
 <html lang="en">
 {% extends 'base.html' %}
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
 
     <title>{% block title %}Delete lesson{% endblock %}</title>
 </head>
+
 <body>
-{% block content %}
-<div class="text-center">
-    <h1>Delete lesson "{{ object.title }}"</h1>
-    <div class="module">
-        <form action="" method="post">
-            {% csrf_token %}
-            <p>Are you sure you want to proceed to deletion of "{{ object }}"?</p>
-            <button type="submit" class="btn btn-primary">Confirm</button>
-        </form>
+    {% block content %}
+    <div class="text-center">
+        <h1>Delete lesson "{{ object.title }}"</h1>
+        <div class="module">
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>Are you sure you want to proceed to deletion of "{{ object }}"?</p>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}
 </body>
+
 </html>

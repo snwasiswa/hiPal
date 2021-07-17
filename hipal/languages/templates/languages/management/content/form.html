@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends "base.html" %}
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}
@@ -12,25 +13,27 @@
         {% endblock %}
     </title>
 </head>
+
 <body>
-{% block content %}
-<div>
-    <h1>
-    {% if object %}
-        Edit "{{ object.title }}"
-        {% else %}
-        Add new contents
-        {% endif %}
+    {% block content %}
+    <div>
+        <h1>
+            {% if object %}
+            Edit "{{ object.title }}"
+            {% else %}
+            Add new contents
+            {% endif %}
         </h1>
-</div>
-<div>
-    <h2>Information about lesson</h2>
-    <form method="post" action="" enctype="multipart/form-data">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Done and Save</button>
-    </form>
-</div>
-{% endblock %}
+    </div>
+    <div>
+        <h2>Information about lesson</h2>
+        <form method="post" action="" enctype="multipart/form-data">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Done and Save</button>
+        </form>
+    </div>
+    {% endblock %}
 </body>
+
 </html>
