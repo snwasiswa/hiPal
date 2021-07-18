@@ -1,5 +1,6 @@
+from django.db.models import Count
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-from django.views.generic import DetailView
+from django.views.generic.detail import DetailView
 from .models import Language, Lesson, Unit, Content
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateResponseMixin, View
@@ -14,15 +15,23 @@ from django.apps import apps
 
 
 # Create your views here.
-class LessonListView(ListView):
+class LessonListView(TemplateResponseMixin, View):
     """View for the list of lessons"""
     model = Lesson
-    template_name = 'languages/management/lesson/list_lesson.html'
+    template_name = 'lessons/list.html'
 
-    def get_queryset(self):
-        """Allows to only display or update the lessons created"""
-        queryset = super().get_queryset()
-        return queryset.filter(creator=self.request.user)
+    def get(self, request, language=None):
+        """ Execute get requests"""
+        languages = Language.objects.annotate(total_lessons=Count('lessons'))
+        lessons = Lesson.objects.annotate(total_units=Count('units'))
+        
+        if language:
+            language = get_object_or_404(Language, slug=language)
+            lessons = lessons.filter(language=language)
+
+        return self.render_to_response({'languages': languages,
+                                        'language': language,
+                                        'lessons': lessons})
 
 
 class CreatorMixin(object):
@@ -73,7 +82,7 @@ def homepage(request):
 
 class LessonDetailView(DetailView):
     model = Lesson
-    template_name = 'languages/lesson/detail.html'
+    template_name = 'languages/lessons/detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

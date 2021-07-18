@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <title>{% block title %}
+               {% if language %}
+                   {{ language.title }} lessons
+               {% else %}
+                   All lessons
+               {% endif %}
+           {% endblock %}
+    </title>
+</head>
+
+<body>
+    {% block content %}
+    <div class="text-center">
+        <h1>
+            {% if language %}
+                {{ object.title}} lessons
+            {% else %}
+                All lessons
+            {% endif %}
+        </h1>
+    </div>
+    <div class="content-wrap text-center">
+        <h2>Languages</h2>
+        <ul id="units">
+            {% for lang in languages %}
+            <li {% if language == lang %} class="selected" {% endif %}>
+                <a href="{% url 'lesson_list_language' lang.slug %}"> {{ lang.title }}
+                <br><span>{{ lang.total_lessons }} lessons</span>
+                </a>
+            </li>
+            {% endfor %}
+            <li {% if not language %} class="selected" {% endif %}>
+                <a href="{% url 'lesson_list' %}">All</a>
+            </li>
+        </ul>
+    </div>
+     <div class="unit text-center">
+         {% for lesson in lessons %}
+            {% with language=lesson.language %}
+            <h3>
+                <a href="{% url 'lesson_detail' lesson.slug %}"> {{ lesson.title }}</a>
+            </h3>
+            <p>
+                <a href="{% url 'lesson_list_language' language.slug %}"> {{ language }}</a>
+                {{ lesson.total_units }} units.
+                Teacher, Instructor, Trainer : {{ lesson.creator.get_full_name }}
+            </p>
+            {% endwith %}
+         {% endfor %}
+     </div>
+    {% endblock %}
+</body>
+
+</html>
