@@ -19,8 +19,8 @@ urlpatterns = [
          name='create_unit_content'),
     path('units/<int:unit_id>/content/<model_name>/<id>/', views.CreateContentView.as_view(),
          name='update_unit_content'),
-    path('units/<int:unit_id>/delete/', views.DeleteContentView.as_view(),
-         name='delete_unit_content'),
-    path('units/<int:unit_id>/', views.ContentListView.as_view(),
-         name='unit_content_list'),
+    path('units/<int:unit_id>/delete/', views.DeleteContentView.as_view(), name='delete_unit_content'),
+    path('units/<int:unit_id>/', views.ContentListView.as_view(), name='unit_content_list'),
+    path('units_order/', views.UnitOrderView.as_view(), name='units_order'),
+    path('contents_order/', views.ContentOrderView.as_view(), name='contents_order'),
 ]

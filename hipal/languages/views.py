@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from students.forms import StudentEnrollment
 from .forms import UnitFormSet
 from django.forms.models import modelform_factory
+from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 
 
@@ -81,6 +82,26 @@ class LessonDetailView(DetailView):
         return context
 
 
+class UnitOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    """ Allows the user to reorder lesson units """
+    def post(self, request):
+        """ Execute post requests"""
+        for unit_id, unit_order in self.request_json.items():
+            Unit.objects.filter(id=unit_id, lesson_creator=request.user).update(order=unit_order)
+
+        return self.render_json_response({'Done and saved': 'Approved'})
+
+
+class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    """ Allows the user to reorder lesson contents """
+    def post(self, request):
+        """ Execute post requests"""
+        for content_id, content_order in self.request_json.items():
+            Content.objects.filter(id=content_id, lesson_creator=request.user).update(order=content_order)
+
+        return self.render_json_response({'Done and saved': 'Approved'})
+
+
 class UpdateLessonUnitView(TemplateResponseMixin, View):
     """ Takes care of handling formsets for updating, deleting and adding units"""
     Lesson = None
@@ -120,13 +141,13 @@ class CreateContentView(TemplateResponseMixin, View):
     model = None
     unit = None
     object_to_create = None
-    template_name = 'languages/management/contents/form.html'
+    template_name = 'languages/management/content/form.html'
 
     def get_model(self, model_name):
         """returns actual model class """
         content_type = ['text', 'image', 'video', 'file']
         if model_name in content_type:
-            return apps.get_model(app_label='languages', model_name='model_name')
+            return apps.get_model(app_label='languages', model_name=model_name)
 
         return None
 
@@ -139,7 +160,7 @@ class CreateContentView(TemplateResponseMixin, View):
     def dispatch(self, request, unit_id, model_name, id=None):
 
         self.model = self.get_model(model_name)
-        self.unit = get_object_or_404(Unit, id=id, lesson__creator=request.user)
+        self.unit = get_object_or_404(Unit, id=unit_id, lesson__creator=request.user)
 
         if id:
             self.object_to_create = get_object_or_404(self.model, id=id, creator=request.user)
@@ -157,6 +178,7 @@ class CreateContentView(TemplateResponseMixin, View):
                              instance=self.object_to_create,
                              data=request.POST,
                              files=request.FILES)
+
         # Valid of the forms
         if form.is_valid():
             object_to_create = form.save(commit=False)
@@ -165,7 +187,7 @@ class CreateContentView(TemplateResponseMixin, View):
             # Create new object if id is not provided
             if not id:
                 Content.objects.create(unit=self.unit, item=object_to_create)
-                return redirect('unit_content', self.unit_id)
+                return redirect('unit_content_list', self.unit.id)
 
         return self.render_to_response({'form': form,
                                         'object': self.object_to_create})

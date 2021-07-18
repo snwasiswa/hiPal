@@ -41,7 +41,7 @@
                 <p>
                     {{ item }} ({{ item|model_name }})
                 </p>
-                <a href="{% url 'update_unit_content' unit.id item|model_name item.id %}">Edit</a>
+                <a class="btn btn-primary" href="{% url 'update_unit_content' unit.id item|model_name item.id %}">Edit</a>
                 <form action="{% url 'delete_unit_content' content.id %}" method="post">
                     <button type="submit" class="btn btn-primary">Delete</button>
                     {% csrf_token %}
@@ -54,14 +54,52 @@
         </div>
         <h3> Add new content</h3>
         <ul class="content-type">
-            <li><a href="{% url 'create_unit_content' unit.id 'file'%}">File</a></li>
-            <li><a href="{% url 'create_unit_content' unit.id 'text'%}">Text</a></li>
-            <li><a href="{% url 'create_unit_content' unit.id 'video'%}">Video</a></li>
-            <li><a href="{% url 'create_unit_content' unit.id 'image'%}">Image</a></li>
+            <li><a href="{% url 'create_unit_content' unit.id 'file' %}">File</a></li>
+            <li><a href="{% url 'create_unit_content' unit.id 'text' %}">Text</a></li>
+            <li><a href="{% url 'create_unit_content' unit.id 'video' %}">Video</a></li>
+            <li><a href="{% url 'create_unit_content' unit.id 'image' %}">Image</a></li>
         </ul>
     </div>
     {% endwith %}
     {% endblock %}
+    {% block domready %}
+       $('#units').sortable({
+          stop: function(event, ui) {
+             units_order = {};
+               $('#units').children().each(function(){
+               // update the order field
+               $(this).find('.order').text($(this).index() + 1);
+               // associate the unit's id with its order
+               units_order[$(this).data('id')] = $(this).index();
+             });
+             $.ajax({
+               type: 'POST',
+               url: '{% url "units_order" %}',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify(units_order)
+             });
+          }
+      });
+
+      $('#units-contents').sortable({
+          stop: function(event, ui) {
+             contents_order = {};
+               $('#units-contents').children().each(function(){
+               // associate the unit's id with its order
+               contents_order[$(this).data('id')] = $(this).index();
+             });
+
+             $.ajax({
+               type: 'POST',
+               url: '{% url "contents_order" %}',
+               contentType: 'application/json; charset=utf-8',
+               dataType: 'json',
+               data: JSON.stringify(contents_order),
+            });
+         }
+      });
+{% endblock %}
 </body>
 
 </html>
