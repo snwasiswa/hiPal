@@ -24,7 +24,7 @@ class Lesson(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     creator = models.ForeignKey(User, related_name='lessons_created', on_delete=models.CASCADE)
     language = models.ForeignKey(Language, related_name='lessons', on_delete=models.CASCADE)
-    overview = models.TextField()
+    outline = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     student = models.ManyToManyField(User, related_name='lessons_joined', blank=True)
 

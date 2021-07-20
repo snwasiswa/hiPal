@@ -6,9 +6,13 @@ from django.urls import reverse_lazy
 from .forms import StudentEnrollment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView
+from django.views.generic.list import ListView
+from languages.models import Lesson
+from django.views.generic.detail import DetailView
 
 
 # Create your views here.
+
 class RegistrationCreationView(CreateView):
     """A registration view for students that inherits from CreateView"""
     template_name = 'registration/register.html'
@@ -40,5 +44,38 @@ class StudentEnrollmentView(LoginRequiredMixin, FormView):
         return reverse_lazy('lesson_detail', args=[self.lesson.id])
 
 
+class StudentLessonView(LoginRequiredMixin, ListView):
+    """ View of lessons that students are enrolled on"""
+    model = Lesson
+    template_name = 'lessons/list_lessons.html'
 
+    def get_queryset(self):
+        queryset = super().get_queryset
+        return queryset.filter(students__in=[self.request.user])
+
+
+class StudentLessonDetailView(DetailView):
+    """ View for student lesson details"""
+    model = Lesson
+    template_name = 'lessons/details.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset
+        return queryset.filter(students__in=[self.request.user])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # get lesson object
+        lesson = self.get_object()
+        args = self.kwargs
+        # store lesson units
+        units = lesson.units
+        if 'unit_id' in args:
+            # current unit
+            context['unit'] = units.get(id=args['unit_id'])
+        else:
+            # first unit
+            context['unit'] = units.all()[0]
+
+        return context
 

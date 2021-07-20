@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <title>{% block title %} {{ object.title }}{% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+        {% with language=object.language %}
+        <h1 class="text-center">
+            {{ object.title }}
+        </h1>
+        <div class="unit text-center">
+            <h2>Outline</h2>
+            <p>
+               <a href="{% url 'lesson_list_language' language.slug %}"> {{ language.title }}</a>
+                 {{ object.units.count }} units.
+                 Teacher, Instructor, Trainer : {{ object.creator.get_full_name }}
+            </p>
+            {{ object.outline|linebreaks }}
+            {% if request.user.is_authenticated %}
+            <form method="POST" action="{% url 'enrollment' %}">
+                {{ enroll_form }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Enroll Now</button>
+            </form>
+            {% else %}
+                <a href="{% url 'register' %}" class="btn btn-primary">Register to enroll</a>
+            {% endif %}
+        </div>
+       {% endwith %}
+    {% endblock %}
+</body>
+
+</html>

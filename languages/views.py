@@ -18,7 +18,7 @@ from django.apps import apps
 class LessonListView(TemplateResponseMixin, View):
     """View for the list of lessons"""
     model = Lesson
-    template_name = 'lessons/list.html'
+    template_name = 'lessons/list_lessons.html'
 
     def get(self, request, language=None):
         """ Execute get requests"""
@@ -81,8 +81,9 @@ def homepage(request):
 
 
 class LessonDetailView(DetailView):
+    """ View for lesson details"""
     model = Lesson
-    template_name = 'languages/lessons/detail.html'
+    template_name = 'lessons/details.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -216,7 +217,7 @@ class DeleteContentView(View):
 
 class ContentListView(TemplateResponseMixin, View):
     """ List View for Unit contents """
-    template_name = 'languages/management/unit/list.html'
+    template_name = 'languages/management/unit/list_lessons.html'
 
     def get(self, request, unit_id):
         """Execute get requests"""
