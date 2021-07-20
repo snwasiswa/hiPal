@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <title>{% block title %} Text Content{% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+       {{ item.content|linebreaks}}
+    {% endblock %}
+</body>
+
+</html>

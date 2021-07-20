@@ -50,8 +50,8 @@ class StudentLessonView(LoginRequiredMixin, ListView):
     template_name = 'lessons/list_lessons.html'
 
     def get_queryset(self):
-        queryset = super().get_queryset
-        return queryset.filter(students__in=[self.request.user])
+        queryset = super().get_queryset()
+        return queryset.filter(student__in=[self.request.user])
 
 
 class StudentLessonDetailView(DetailView):
@@ -60,8 +60,8 @@ class StudentLessonDetailView(DetailView):
     template_name = 'lessons/details.html'
 
     def get_queryset(self):
-        queryset = super().get_queryset
-        return queryset.filter(students__in=[self.request.user])
+        queryset = super().get_queryset()
+        return queryset.filter(student__in=[self.request.user])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

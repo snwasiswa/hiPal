@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <title>{% block title %} Image Content {% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+     <p><img src="{{ item.file.url }}" class="text-center btn btn-primary" alt="{{ item.title }}">Download File</a></p>
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+    <title>{% block title %} Video Content{% endblock %}</title>
+</head>
+
+<body>
+    {% block content %}
+      {% load embed_video_tags %}
+      {% video item.url "small" %}
+    {% endblock %}
+</body>
+
+</html>

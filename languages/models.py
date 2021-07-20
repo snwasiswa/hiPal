@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.template.loader import render_to_string
+
 from .fields import OrderOfField
 
 
@@ -72,6 +74,10 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+    def render(self):
+        """Renders template and returns contents as a string"""
+        return render_to_string(f'languages/contents/{self.meta.model_name}.html', {'item': self})
 
     def __str__(self):
         return self.title
