@@ -217,7 +217,7 @@ class DeleteContentView(View):
 
 class ContentListView(TemplateResponseMixin, View):
     """ List View for Unit contents """
-    template_name = 'languages/management/unit/list_lessons.html'
+    template_name = 'languages/management/unit/list.html'
 
     def get(self, request, unit_id):
         """Execute get requests"""

@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.template.loader import render_to_string
-
 from .fields import OrderOfField
 
 
@@ -41,7 +40,7 @@ class Unit(models.Model):
     lesson = models.ForeignKey(Lesson, related_name='units', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    order = OrderOfField(blank=True, for_fields=['language'])
+    order = OrderOfField(blank=True, for_fields=['lesson'])
 
     def __str__(self):
         return f'{self.order}. {self.title}'

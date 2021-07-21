@@ -11,8 +11,8 @@
 <body>
     {% block content %}
     {% with lesson=unit.lesson %}
-    <h1>Lesson "{{ lesson.title }}"</h1>
-    <div class="content">
+    <h1 class="text-center">Lesson "{{ lesson.title }}"</h1>
+    <div class="content text-center">
         <h3>Units</h3>
         <ul id="units">
             {% for u in lesson.units.all %}
@@ -29,9 +29,14 @@
             <li>You don't have any units yet.</li>
             {% endfor %}
         </ul>
+        <div>
+            <p>
+                <a href="{% url 'lessons_list' %} ">My Lessons</a>
+            </p>
+        </div>
 
     </div>
-    <div class="unit">
+    <div class="unit text-center">
         <h2>Unit {{ unit.order|add:1 }} : {{ unit.title }}</h2>
         <h3>Unit Contents</h3>
         <div id="unit-contents">
