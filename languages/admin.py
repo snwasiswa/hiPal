@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import Language, Lesson, Unit, Content
 
 
-# Register your models here.
 
+# Register your models here.
 @admin.register(Language)
 class AdminLanguage(admin.ModelAdmin):
     """Register the model with specific fields"""
@@ -23,3 +23,7 @@ class AdminLesson(admin.ModelAdmin):
     list_filter = ['creator', 'created_on']
     search_fields = ['title', 'overview']
     inlines = [Inline]
+
+
+# Use memcache admin index site
+admin.site.index_template = 'memcache_status/admin_index.html'
