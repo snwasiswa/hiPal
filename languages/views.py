@@ -1,5 +1,5 @@
 from django.db.models import Count
-from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.detail import DetailView
 from .models import Language, Lesson, Unit, Content
 from django.views.generic.list import ListView
@@ -12,6 +12,7 @@ from .forms import UnitFormSet
 from django.forms.models import modelform_factory
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
+from django.core.cache import cache
 
 
 # Create your views here.
@@ -22,12 +23,30 @@ class LessonListView(TemplateResponseMixin, View):
 
     def get(self, request, language=None):
         """ Execute get requests"""
-        languages = Language.objects.annotate(total_lessons=Count('lessons'))
-        lessons = Lesson.objects.annotate(total_units=Count('units'))
-        
+
+        # Get data from the cache data
+        languages = cache.get('all_languages')
+        # Do calculations when data are not in the cached data
+        if not languages:
+            languages = Language.objects.annotate(total_lessons=Count('lessons'))
+            cache.set('all_languages', languages)
+
+        all_lessons = Lesson.objects.annotate(total_units=Count('units'))
+
+        # Get dynamic data(language lessons) based on key from the cache
         if language:
             language = get_object_or_404(Language, slug=language)
-            lessons = lessons.filter(language=language)
+            key = f'language_{language.id}_lessons'
+            lessons = cache.get(key)
+            # Do calculations when data are not in the cached data
+            if not lessons:
+                lessons = all_lessons.filter(language=language)
+                cache.set(key, lessons)
+            else:
+                lessons = cache.get('all_lessons')
+                if not lessons:
+                    lessons = all_lessons
+                    cache.get('all_lessons', lessons)
 
         return self.render_to_response({'languages': languages,
                                         'language': language,

@@ -22,7 +22,7 @@
         <form method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <p><input type="submit" class="btn btn-primary" value="Done and Save"></p>
+            <p><input type="submit" class="btn btn-primary" href="{% url 'unit_content_list' %}" value="Done and Save"></p>
         </form>
     </div>
     {% endblock %}
