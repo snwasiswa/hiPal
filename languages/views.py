@@ -33,7 +33,7 @@ class LessonListView(TemplateResponseMixin, View):
 
         all_lessons = Lesson.objects.annotate(total_units=Count('units'))
 
-        # Get dynamic data(language lessons) based on key from the cache
+        #  Build key dynamically using language id
         if language:
             language = get_object_or_404(Language, slug=language)
             key = f'language_{language.id}_lessons'
@@ -42,11 +42,12 @@ class LessonListView(TemplateResponseMixin, View):
             if not lessons:
                 lessons = all_lessons.filter(language=language)
                 cache.set(key, lessons)
-            else:
-                lessons = cache.get('all_lessons')
-                if not lessons:
-                    lessons = all_lessons
-                    cache.get('all_lessons', lessons)
+        # Use all_lessons cache key to store all lessons
+        else:
+            lessons = cache.get('all_lessons')
+            if not lessons:
+                lessons = all_lessons
+                cache.get('all_lessons', lessons)
 
         return self.render_to_response({'languages': languages,
                                         'language': language,

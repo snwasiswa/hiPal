@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import Language, Lesson, Unit, Content
 
 
-
 # Register your models here.
 @admin.register(Language)
 class AdminLanguage(admin.ModelAdmin):
@@ -21,7 +20,7 @@ class AdminLesson(admin.ModelAdmin):
     list_display = ['title', 'slug', 'created_on', 'creator']
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ['creator', 'created_on']
-    search_fields = ['title', 'overview']
+    search_fields = ['title', 'outline']
     inlines = [Inline]
 
 

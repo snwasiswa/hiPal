@@ -39,6 +39,11 @@ h1 {
     font-weight: 300;
     font-size: 20px;
     color: var(--body-quiet-color);
+    text-transform: uppercase;
+}
+
+tr {
+    text-transform: uppercase;
 }
 
 h2 {

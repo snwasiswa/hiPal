@@ -26,6 +26,7 @@ urlpatterns = [
                   path('accounts/login/', views.LoginView.as_view(), name='login'),
                   path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
                   path('students/', include('students.urls')),
+                  path('restapi/', include('languages.restapi.urls', namespace='restapi')),
 
                   # path('accounts/', include('django.contrib.auth.urls')),
                   # path('', TemplateView.as_view(template_name='registration/login.html'), name='login'),
