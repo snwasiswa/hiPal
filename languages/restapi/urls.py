@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('languages/', views.LanguageListView.as_view(), name='list'),
     path('languages/<pk>/', views.LanguageDetailView.as_view(), name='details'),
-    path('lessons/<lesson_id>/enrollment/', views.LessonEnrollmentView.as_view(), name='enrollment'),
+    # path('lessons/<lesson_id>/registration/', views.LessonRegistrationView.as_view(), name='registration'),
     path('api/', include(router.urls)),
 
 ]
