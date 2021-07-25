@@ -11,22 +11,31 @@
 
     {% block content %}
 
+    <div class="container text-light">
+        <div class="py-3 id text-center text-primary">
+            <h1 class="py-5">Welcome to hiPal</h1>
+        </div>
+        <div class="py-4">
+            <h3 class="text-center"> Log in</h3>
+        </div>
     <div class="text-center">
         {% if form.errors %}
         <p>Password or username didn't match. Please enter correct password or username.</p>
         {% else %}
-        <p>Use the following to log in:</p>
+        <p>Enter your credentials to sign in:</p>
         {% endif %}
         <div>
-            <form action="{% url 'login' %}" method="post" class="form-group">
+            <form method="post" class="form-group">
                 {{ form.as_p }}
                 {% csrf_token %}
-                <input type="hidden" name="next" value="{{ next }}" />
-                <a type="submit" class="btn btn-primary" href="{% url 'student_lesson_list' %}">Log in</a>
-                <p>Don't have an account.</p>
-                <button type="submit" class="btn btn-primary">Sign up</button>
+                <p>
+                     <input class="btn btn-primary" type="submit" name="next" value="Log in" />
+                </p>
             </form>
+            <p>Don't have an account.</p>
+            <a class="btn btn-primary" href="{% url 'register' %}">Sign up</a>
         </div>
+    </div>
     </div>
 
     {% endblock %}

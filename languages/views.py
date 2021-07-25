@@ -1,5 +1,7 @@
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth import authenticate, login
 from django.views.generic.detail import DetailView
 from .models import Language, Lesson, Unit, Content
 from django.views.generic.list import ListView
@@ -8,12 +10,12 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from students.forms import StudentEnrollment
-from .forms import UnitFormSet
+from .forms import UnitFormSet, InstructorLoginForm
 from django.forms.models import modelform_factory
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.core.cache import cache
-
+from .forms import InstructorRegistrationForm
 
 
 # Create your views here.
@@ -115,6 +117,7 @@ class LessonDetailView(DetailView):
 
 class UnitOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
     """ Allows the user to reorder lesson units """
+
     def post(self, request):
         """ Execute post requests"""
         for unit_id, unit_order in self.request_json.items():
@@ -125,6 +128,7 @@ class UnitOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
 
 class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
     """ Allows the user to reorder lesson contents """
+
     def post(self, request):
         """ Execute post requests"""
         for content_id, content_order in self.request_json.items():
@@ -226,6 +230,7 @@ class CreateContentView(TemplateResponseMixin, View):
 
 class DeleteContentView(View):
     """Helps deleting lesson contents"""
+
     def post(self, request, unit_id):
         """Execute post requests"""
         content = get_object_or_404(Content, id=unit_id,
@@ -245,3 +250,42 @@ class ContentListView(TemplateResponseMixin, View):
         unit = get_object_or_404(Unit, id=unit_id, lesson__creator=request.user)
         return self.render_to_response({'unit': unit
                                         })
+
+
+def user_login(request):
+    """ Login View for Instructors"""
+    if request.method == 'POST':
+        form = InstructorLoginForm(request.POST)
+        if form.is_valid():
+            credentials = form.cleaned_data
+            user = authenticate(request, password=credentials['password'], username=credentials['username'])
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('lessons_list')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = InstructorLoginForm()
+    return render(request, 'account/login.html', {'form': form})
+
+
+def instructor_registration(request):
+    if request.method == 'POST':
+
+        instructor_form = InstructorRegistrationForm(request.POST)
+
+        if instructor_form.is_valid():
+            new_instructor = instructor_form.save(commit=False)
+            new_instructor.set_password(instructor_form.cleaned_data['password1'])
+            new_instructor.save()
+
+            return HttpResponseRedirect(reverse_lazy('lessons_list'))
+
+            # return render(request, 'registration/register.html', {'new_student': new_student})
+    else:
+        instructor_form = InstructorRegistrationForm()
+    return render(request, 'registration/register.html', {'instructor_form': instructor_form})

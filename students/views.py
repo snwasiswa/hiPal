@@ -1,18 +1,41 @@
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from .forms import StudentEnrollment
+from .forms import StudentEnrollment, StudentLoginForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
 from languages.models import Lesson
 from django.views.generic.detail import DetailView
 from django.contrib.auth.views import LoginView, LogoutView
+from .forms import StudentRegistrationForm
 
 
 # Create your views here.
+def user_login(request):
+    """ Login View for Instructors"""
+    if request.method == 'POST':
+        form = StudentLoginForm(request.POST)
+        if form.is_valid():
+            credentials = form.cleaned_data
+            user = authenticate(request, password=credentials['password'], username=credentials['username'])
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('student_lesson_list')
+                else:
+                    return HttpResponse('Disabled account')
+            else:
+                return HttpResponse('Invalid login')
+    else:
+        form = StudentLoginForm()
+    return render(request, 'languages/templates/account/login.html', {'form': form})
+
+
 class RegistrationCreationView(CreateView):
     """A registration view for students that inherits from CreateView"""
     template_name = 'registration/register.html'
@@ -26,6 +49,25 @@ class RegistrationCreationView(CreateView):
         credentials = form.cleaned_data
         login(self.request, authenticate(password=credentials['password'], username=credentials['username']))
         return result
+
+
+def register(request):
+    if request.method == 'POST':
+
+        student_form = StudentRegistrationForm(request.POST)
+
+        if student_form.is_valid():
+
+            new_student = student_form.save(commit=False)
+            new_student.set_password(student_form.cleaned_data['password1'])
+            new_student.save()
+
+            return HttpResponseRedirect(reverse_lazy('student_lesson_list'))
+
+            # return render(request, 'registration/register.html', {'new_student': new_student})
+    else:
+        student_form = StudentRegistrationForm()
+    return render(request, 'registration/register.html', {'student_form': student_form})
 
 
 class StudentEnrollmentView(LoginRequiredMixin, FormView):
