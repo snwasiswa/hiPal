@@ -11,5 +11,6 @@ urlpatterns = [
     path('lesson/<pk>/', views.StudentLessonDetailView.as_view(), name='student_lesson_details'),
     path('lesson/<pk>/unit_id/', views.StudentLessonDetailView.as_view(), name='student_lesson_details_unit'),
     path('', languages.views.LessonListView.as_view(), name='lesson_list'),
+    path('students/login/', views.LoginView.as_view(), name='login'),
 
 ]

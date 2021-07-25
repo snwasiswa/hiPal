@@ -9,16 +9,16 @@ from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
 from languages.models import Lesson
 from django.views.generic.detail import DetailView
+from django.contrib.auth.views import LoginView, LogoutView
 
 
 # Create your views here.
-
 class RegistrationCreationView(CreateView):
     """A registration view for students that inherits from CreateView"""
     template_name = 'registration/register.html'
     form_class = UserCreationForm
 
-    # success_url = reverse_lazy(students_lessons_list)
+    success_url = reverse_lazy('student_lesson_list')
 
     def form_valid(self, form):
         """A form to valid students credentials"""
@@ -79,3 +79,8 @@ class StudentLessonDetailView(DetailView):
 
         return context
 
+
+class StudentLogin(LoginView):
+    """ Student Login View which inherits from LoginView"""
+
+    template_name = 'registration/studentlogin.html'

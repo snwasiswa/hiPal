@@ -9,7 +9,7 @@ admin.site.index_title = "Welcome to the Portal"
 
 # Patterns of different paths
 urlpatterns = [
-    # path('', views.homepage, name='homepage'),
+    #path('', views.homepage, name='homepage'),
 
     path('my_lessons/', views.ManageLessonView.as_view(), name='lessons_list'),
     path('create', views.LessonCreateView.as_view(), name='add_lesson'),
@@ -25,7 +25,7 @@ urlpatterns = [
     path('units_order/', views.UnitOrderView.as_view(), name='units_order'),
     path('contents_order/', views.ContentOrderView.as_view(), name='contents_order'),
     path('language/<slug:language>/', views.LessonListView.as_view(), name='lesson_list_language'),
-    path('<slug:slug>/', views.LessonDetailView.as_view(), name='lesson_detail'),
+    #path('<slug:slug>/', views.LessonDetailView.as_view(), name='lesson_detail'),
     path('', views.LessonListView.as_view(), name='lesson_list'),
 
 ]

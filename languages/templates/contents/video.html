@@ -4,14 +4,27 @@
 {% load static %}
 
 <head>
-    <title>{% block title %} Video Content{% endblock %}</title>
+        <!-- Required meta templatetags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!--Incorporated CSS-->
+    <link rel="stylesheet" href="{%static 'css/languages.css'%}" type="text/css">
+    <title>{% block title %} Video Content {% endblock %}</title>
 </head>
 
 <body>
-    {% block content %}
+<div class="container">
+     {% block content %}
       {% load embed_video_tags %}
       {% video item.url "small" %}
     {% endblock %}
+</div>
+
 </body>
 
 </html>

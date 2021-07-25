@@ -15,6 +15,7 @@ from django.apps import apps
 from django.core.cache import cache
 
 
+
 # Create your views here.
 class LessonListView(TemplateResponseMixin, View):
     """View for the list of lessons"""

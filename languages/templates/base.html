@@ -12,15 +12,15 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{%static 'css/languages.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/languages.css' %}" type="text/css">
 
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
-<body>
-    <nav class="navbar navbar-dark bg-primary">
+<body style="background-color:black">
+    <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-primary" href="/">hiPal</a>
+            <a class="navbar-brand text-light" href="/">hiPal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,13 +28,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link text-primary" href="/about">About<span class="sr-only">(current)</span></a>
+                        <a class="nav-link text-light" href="/home">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-primary" href="/language">Learn a language</a>
+                        <a class="nav-link text-light" href="/about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-primary" href="/blog">Blog</a>
+                        <a class="nav-link text-light" href="/blog">Blog</a>
                     </li>
                 </ul>
                 <div class="form-inline my-2 my-lg-0">
@@ -44,16 +44,14 @@
 
                     {% else %}
                     <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'login' %}">Sign in</a>
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign up</button>
+                    <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'register' %}">Sign up</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="id text-center">
-        <h1>Log in to hiPal</h1>
-    </div>
+
     <div id="content">
         {% block content %}
         {% endblock %}
