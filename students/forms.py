@@ -16,8 +16,8 @@ class StudentLoginForm(forms.Form):
 
 class StudentRegistrationForm(forms.ModelForm):
     """ Student Registration Form"""
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'style': "width:100%;"}))
+    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput(attrs={'style': "width:100%;"}))
 
     class Meta:
         model = User

@@ -13,7 +13,7 @@ urlpatterns = [
     path('', languages.views.LessonListView.as_view(), name='lesson_list'),
     # path('students/login/', views.LoginView.as_view(), name='login'),
     path('accounts/login/login', views.user_login, name='login'),
-    path('register/', views.register, name='student_registration'),
+    path('accounts/students/register/', views.register, name='student_registration'),
 
 
 ]

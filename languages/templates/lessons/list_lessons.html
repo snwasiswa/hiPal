@@ -40,7 +40,7 @@
         <div class="row">
               <div class="content-wrap text-center col-sm my-3 pb-5 pt-5 bg-light text-dark">
         <h2>Languages</h2>
-                  <table>
+
         <ul id="units">
             {% for lang in languages %}
             <li {% if language == lang %} class="selected" {% endif %}>
@@ -53,7 +53,7 @@
                 <a href="{% url 'lesson_list' %}">All</a>
             </li>
         </ul>
-                  </table>
+
     </div>
                 <div class="unit text-center col-sm my-3 pb-5 pt-5 bg-light text-dark">
          {% for lesson in lessons %}

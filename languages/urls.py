@@ -28,7 +28,7 @@ urlpatterns = [
     #path('<slug:slug>/', views.LessonDetailView.as_view(), name='lesson_detail'),
     path('', views.LessonListView.as_view(), name='lesson_list'),
     path('accounts/login/', views.user_login, name='instructor_login'),
-    path('register/', views.instructor_registration, name='instructor_registration'),
+    path('accounts/instructors/register/', views.instructor_registration, name='instructor_registration'),
 
 
 ]
