@@ -9,23 +9,27 @@
 
 <body>
     {% block content %}
-    <div class="text-center">
+    <div class="container">
+           <div class="text-center text-light">
         <h1>Lessons</h1>
     </div>
-     <div class="unit text-center">
+     <div class="text-center text-light">
          {% for lesson in object_list %}
          <div>
             <h3>{{ lesson.title }}</h3>
                 <p><a href="{% url 'student_lesson_details' lesson.id %}">Get access to contents</a>
                 </p>
          </div>
-         <p>
+         {% empty %}
+         <p class="text-light">
              You need to be enrolled in to gain access to any of the contents.
              <a href="{% url 'lesson_list' %}"> You can browse lessons</a>
                 for enrollment.
          </p>
          {% endfor %}
      </div>
+    </div>
+
     {% endblock %}
 </body>
 

@@ -19,8 +19,9 @@
 </head>
 
 <body>
+{% block content %}
 <div class="container text-light">
-    {% block content %}
+
     {% with lesson=unit.lesson %}
     <h1 class="text-center text-light">Lesson "{{ lesson.title }}"</h1>
     <div class="content text-center text-light">

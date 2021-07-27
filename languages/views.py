@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -5,7 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.views.generic.detail import DetailView
 from .models import Language, Lesson, Unit, Content
 from django.views.generic.list import ListView
-from django.views.generic.base import TemplateResponseMixin, View
+from django.views.generic.base import TemplateResponseMixin, View, TemplateView
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -222,7 +223,7 @@ class CreateContentView(TemplateResponseMixin, View):
             # Create new object if id is not provided
             if not id:
                 Content.objects.create(unit=self.unit, item=object_to_create)
-                return redirect('unit_content_list', self.unit.id)
+                #return redirect('unit_content_list', self.unit.id)
 
         return self.render_to_response({'form': form,
                                         'object': self.object_to_create})
@@ -252,8 +253,9 @@ class ContentListView(TemplateResponseMixin, View):
                                         })
 
 
-def user_login(request):
+def instructor_login_view(request):
     """ Login View for Instructors"""
+
     if request.method == 'POST':
         form = InstructorLoginForm(request.POST)
         if form.is_valid():
@@ -282,10 +284,19 @@ def instructor_registration(request):
             new_instructor = instructor_form.save(commit=False)
             new_instructor.set_password(instructor_form.cleaned_data['password1'])
             new_instructor.save()
+            group = Group.objects.get(name='Instructors')
+            new_instructor.groups.add(group)
+
+            login(request, new_instructor)
 
             return HttpResponseRedirect(reverse_lazy('lessons_list'))
 
-            # return render(request, 'registration/register.html', {'new_student': new_student})
+            # return render(request, 'registration/instructor_registration.html', {'new_student': new_student})
     else:
         instructor_form = InstructorRegistrationForm()
-    return render(request, 'registration/register.html', {'instructor_form': instructor_form})
+    return render(request, 'registration/instructor_registration.html', {'instructor_form': instructor_form})
+
+
+class CustomLogoutView(TemplateView):
+    """Custom Log out View"""
+    template_name = 'registration/logout.html'

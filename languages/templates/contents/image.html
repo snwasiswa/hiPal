@@ -18,9 +18,10 @@
 </head>
 
 <body>
-    {% block content %}
+    <div class="container">
+     {% block content %}
      <p><img src="{{ item.file.url }}" class="text-center btn btn-primary" alt="{{ item.title }}">Download File</a></p>
     {% endblock %}
+    </div>
 </body>
-
 </html>

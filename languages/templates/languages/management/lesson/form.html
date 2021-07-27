@@ -19,7 +19,8 @@
 
 <body>
     {% block content %}
-    <div class="text-center">
+    <div class="container">
+    <div class="text-center text-light">
         {% if object %}
         <h1>Edit lesson "{{ object.title}}"
             {% else %}
@@ -27,13 +28,17 @@
             {% endif %}
         </h1>
     </div>
-    <div class="text-center">
+    <div class="text-center text-light" >
         <h2>Information about lesson</h2>
-        <form method="post">
+        <div style=" display:inline-block;">
+            <form method="post" style="display:inline-block;">
             {{ form.as_p }}
             {% csrf_token %}
-            <p><input type="submit" class="btn btn-primary" href="{% url 'unit_content_list' %}" value="Done and Save"></p>
+            <p><input type="submit" class="btn btn-primary" value="Done and Save"></p>
         </form>
+        </div>
+
+    </div>
     </div>
     {% endblock %}
 </body>

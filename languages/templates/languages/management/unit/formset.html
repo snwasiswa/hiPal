@@ -18,7 +18,8 @@
 </head>
 
 <body>
-    {% block content %}
+<div class="container">
+     {% block content %}
     <div class="text-center text-light">
         <h1>Edit "{{ lesson.title }}"</h1>
         <div class="unit">
@@ -32,6 +33,7 @@
         </div>
     </div>
     {% endblock%}
+</div>
 </body>
 
 </html>

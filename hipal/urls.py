@@ -16,15 +16,17 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
 from django.contrib.auth import views
-
+from django.urls import path, include
+import languages
+from languages.views import CustomLogoutView
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('languages.urls')),
                   path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
                   #path('accounts/login/', views.LoginView.as_view(), name='login'),
+                  # path('accounts/logout/', languages.views.CustomLogoutView.as_view(), name='logout'),
                   path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
                   path('', include('students.urls')),
                   path('restapi/', include('languages.restapi.urls', namespace='restapi')),

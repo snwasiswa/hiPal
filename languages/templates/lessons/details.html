@@ -18,8 +18,9 @@
 </head>
 
 <body>
+{% block content %}
     <div class="container text-light">
-    {% block content %}
+
         {% with language=object.language %}
         <h1 class="text-center">
             {{ object.title }}
@@ -39,12 +40,13 @@
                 <button type="submit" class="btn btn-primary">Enroll Now</button>
             </form>
             {% else %}
-                <a href="{% url 'register' %}" class="btn btn-primary">Register to enroll</a>
+                <a href="{% url 'student_registration' %}" class="btn btn-primary">Register to enroll</a>
             {% endif %}
         </div>
        {% endwith %}
-    {% endblock %}
+
     </div>
+   {% endblock %}
 </body>
 
 </html>

@@ -18,9 +18,10 @@
 </head>
 
 <body>
-    {% block content %}
+    <div class="container">
+         {% block content %}
        {{ item.content|linebreaks}}
     {% endblock %}
+    </div>
 </body>
-
 </html>

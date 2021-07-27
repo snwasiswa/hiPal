@@ -15,7 +15,7 @@ from .forms import StudentRegistrationForm
 
 
 # Create your views here.
-def user_login(request):
+def student_login_view(request):
     """ Login View for Instructors"""
     if request.method == 'POST':
         form = StudentLoginForm(request.POST)
@@ -27,6 +27,7 @@ def user_login(request):
                 if user.is_active:
                     login(request, user)
                     return redirect('student_lesson_list')
+
                 else:
                     return HttpResponse('Disabled account')
             else:
@@ -38,7 +39,7 @@ def user_login(request):
 
 class RegistrationCreationView(CreateView):
     """A registration view for students that inherits from CreateView"""
-    template_name = 'registration/register.html'
+    template_name = 'registration/instructor_registration.html'
     form_class = UserCreationForm
 
     success_url = reverse_lazy('student_lesson_list')
@@ -64,7 +65,7 @@ def register(request):
 
             return HttpResponseRedirect(reverse_lazy('student_lesson_list'))
 
-            # return render(request, 'registration/register.html', {'new_student': new_student})
+            # return render(request, 'registration/instructor_registration.html', {'new_student': new_student})
     else:
         student_form = StudentRegistrationForm()
     return render(request, 'registration/register.html', {'student_form': student_form})
@@ -83,13 +84,13 @@ class StudentEnrollmentView(LoginRequiredMixin, FormView):
 
     def get_success_url(self):
         """ Returns the URL that the user will be directed to if the form is successful"""
-        return reverse_lazy('lesson_detail', args=[self.lesson.id])
+        return reverse_lazy('student_lesson_details', args=[self.lesson.id])
 
 
 class StudentLessonView(LoginRequiredMixin, ListView):
     """ View of lessons that students are enrolled on"""
     model = Lesson
-    template_name = 'lessons/list_lessons.html'
+    template_name = 'lessons/list.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -99,7 +100,7 @@ class StudentLessonView(LoginRequiredMixin, ListView):
 class StudentLessonDetailView(DetailView):
     """ View for student lesson details"""
     model = Lesson
-    template_name = 'lessons/details.html'
+    template_name = 'lessons/student_lesson_detail.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -126,3 +127,6 @@ class StudentLogin(LoginView):
     """ Student Login View which inherits from LoginView"""
 
     template_name = 'registration/studentlogin.html'
+
+
+

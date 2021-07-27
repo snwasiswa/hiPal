@@ -4,7 +4,7 @@
 {% load static %}
 
 <head>
-        <!-- Required meta templatetags -->
+    <!-- Required meta templatetags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -15,65 +15,66 @@
     <!--Incorporated CSS-->
     <link rel="stylesheet" href="{% static 'css/languages.css' %}" type="text/css">
     <title>{% block title %}
-               {% if language %}
-                   {{ language.title }} lessons
-               {% else %}
-                   All lessons
-               {% endif %}
-           {% endblock %}
+        {% if language %}
+        {{ language.title }} lessons
+        {% else %}
+        All lessons
+        {% endif %}
+        {% endblock %}
     </title>
 </head>
 
 <body>
-    <div class="container text-light">
     {% block content %}
-    <div class="text-center">
-        <h1>
-            {% if language %}
-                {{ object.title}} lessons
-            {% else %}
+    <div class="container text-light">
+
+        <div class="text-center text-light">
+            <h1>
+                {% if language %}
+                {{ language.title}} lessons
+                {% else %}
                 All lessons
-            {% endif %}
-        </h1>
-    </div>
+                {% endif %}
+            </h1>
+        </div>
 
         <div class="row">
-              <div class="content-wrap text-center col-sm my-3 pb-5 pt-5 bg-light text-dark">
-        <h2>Languages</h2>
+            <div class="col-sm my-3 pb-5 pt-5 bg-dark text-light">
+                <h2>Languages</h2>
 
-        <ul id="units">
-            {% for lang in languages %}
-            <li {% if language == lang %} class="selected" {% endif %}>
-                <a href="{% url 'lesson_list_language' lang.slug %}"> {{ lang.title }}
-                <br><span>{{ lang.total_lessons }} lessons</span>
-                </a>
-            </li>
-            {% endfor %}
-            <li {% if not language %} class="selected" {% endif %}>
-                <a href="{% url 'lesson_list' %}">All</a>
-            </li>
-        </ul>
+                <p id="units">
+                    {% for lang in languages %}
+                <ul {% if language == lang %} class="selected" {% endif %}>
+                    <a href="{% url 'lesson_list_language' lang.slug %}"> {{ lang.title }}
+                        <br><span>{{ lang.total_lessons }} lessons</span>
+                    </a>
+                </ul>
+                {% endfor %}
+                <ul {% if not language %} class="selected" {% endif %}>
+                    <a href="{% url 'lesson_list' %}">All Contents</a>
+                </ul>
+                </p>
+
+            </div>
+            <div class="text-center col-sm my-3 pb-5 pt-5 bg-light text-dark">
+                {% for lesson in lessons %}
+                {% with language=lesson.language %}
+                <h3>
+                    <a href="{% url 'lesson_detail' lesson.slug %}"> {{ lesson.title }}</a>
+                </h3>
+                <p>
+                    <a href="{% url 'lesson_list_language' language.slug %}"> {{ language }}</a>
+                    {{ lesson.total_units }} units.
+                    Teacher, Instructor, Trainer : {{ lesson.creator.get_full_name }}
+                </p>
+                {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
 
     </div>
-                <div class="unit text-center col-sm my-3 pb-5 pt-5 bg-light text-dark">
-         {% for lesson in lessons %}
-            {% with language=lesson.language %}
-            <h3>
-                <a href="{% url 'lesson_detail' lesson.slug %}"> {{ lesson.title }}</a>
-            </h3>
-            <p>
-                <a href="{% url 'lesson_list_language' language.slug %}"> {{ language }}</a>
-                {{ lesson.total_units }} units.
-                Teacher, Instructor, Trainer : {{ lesson.creator.get_full_name }}
-            </p>
-            {% endwith %}
-         {% endfor %}
-     </div>
-        </div>
-
-
     {% endblock %}
-        </div>
+
 </body>
 
 </html>
