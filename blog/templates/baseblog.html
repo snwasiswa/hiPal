@@ -1,5 +1,8 @@
 <!doctype html>
 <html lang="en">
+{% load blog_tags %}
+{% load static %}
+
 
 <head>
     <!-- Required meta templatetags -->
@@ -37,31 +40,43 @@
                     <a class="nav-link text-primary" href="/blog">Blog</a>
                 </li>
             </ul>
-            <div class="form-inline my-2 my-lg-0">
-
-                {% if request.user.is_authenticated %}
-                <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
-
-                {% else %}
-                <a class="btn btn-outline-primary my-2 my-sm-0" href="{% url 'login'%}">Sign in</a>
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign up</button>
-                {% endif %}
-
-
-            </div>
+           <div class="form-inline my-2 my-lg-0">
+                    {% if request.user.is_authenticated %}
+                    Hello, {{ request.user.first_name }}!
+                    <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
+                    {% else %}
+                    <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'instructor_login' %}">Sign in</a>
+                    {% endif %}
+           </div>
         </div>
     </nav>
-    <div class="id text-center">
+    <div class="container">
+
+        <div class="id text-center">
         <h1>Welcome to your Blog</h1>
-    </div>
+        </div>
+
     <div id="content">
         {% block content %}
         {% endblock %}
     </div>
     <div id="sidebar">
         <h2>My hiPal blog posts</h2>
-        <p>This is a try</p>
+        <p>This is a try. {% total_posts %} posts written so far.</p>
+        <h3>Latest posts</h3>
+        {% latest_posts 4 %}
+        <h3>Most commented posts</h3>
+        {% most_commented_posts as posts %}
+        <ul>
+            {% for post in posts %}
+            <li>
+                <a href="{{ post.get_absolute_url }}">{{ post.title}}</a>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
+    </div>
+
     <footer class=" text-center">
         <p class="py-3 my-0">
             © 2021 hiPal
