@@ -18,18 +18,26 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
+from blog.sitemaps import BlogPostSitemap
 import languages
 from languages.views import CustomLogoutView
+
+sitemaps = {
+    'posts': BlogPostSitemap,
+}
+
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('languages.urls')),
                   path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
-                  #path('accounts/login/', views.LoginView.as_view(), name='login'),
+                  # path('accounts/login/', views.LoginView.as_view(), name='login'),
                   # path('accounts/logout/', languages.views.CustomLogoutView.as_view(), name='logout'),
                   path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
                   path('', include('students.urls')),
                   path('restapi/', include('languages.restapi.urls', namespace='restapi')),
+                  path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 
 
                   # path('accounts/', include('django.contrib.auth.urls')),
