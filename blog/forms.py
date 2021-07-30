@@ -18,4 +18,6 @@ class PostCommentForm(forms.ModelForm):
         fields = ('name', 'email', 'body')
 
 
-
+class SearchVectorForm(forms.Form):
+    """Custom form for a search lookup"""
+    query = forms.CharField()

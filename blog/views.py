@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from .models import BlogPost, Comment
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.generic import ListView
-from .forms import EmailBlogPostForm, PostCommentForm
+from .forms import EmailBlogPostForm, PostCommentForm, SearchVectorForm
 from django.core.mail import send_mail
 from taggit.models import Tag
 from django.db.models import Count
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
 
 
 # Create your views here.
@@ -102,3 +103,25 @@ def sharing_post(request, blog_post_id):
 
     # Return HTTP response
     return render(request, 'posts/sharing_post.html', {'post': blog_post, 'form': sharing_form, 'sent': send_post})
+
+
+def search_engine(request):
+    """Custom View for for posts search"""
+    # Initially empty query, result and form
+    query = None
+    form = SearchVectorForm()
+    vector = TrigramSimilarity('title', 'blog_body')
+    query = SearchQuery(query)
+    search_result = []
+    if 'query' in request.GET:
+        form = SearchVectorForm(request.GET)
+        # Validate form
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            search_result = BlogPost.objects_published.annotate(similarity=vector,
+                                                                ).filter(similarity__gte=0.1).order_by('-similarity')
+    return render(request, 'posts/search.html', {'form': form,
+                                                 'query': query,
+                                                 'search_result': search_result})
+
+
