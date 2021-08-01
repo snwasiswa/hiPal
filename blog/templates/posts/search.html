@@ -15,14 +15,14 @@
 
     <!--Incorporated CSS-->
     {% load static %}
-    <link href="{% static 'css/blog.css' %}" rel="stylesheet" type="text/css">
+   <link href="{% static 'blog/styles.css' %}" rel="stylesheet" type="text/css">
 
     <title>{% block title %} Search Posts{% endblock %}</title>
 </head>
 
 <body>
     {% block content %}
-    <div class=" container">
+
         {% if query %}
         <h1>Search Results for "{{ query }}"</h1>
         <h3>
@@ -46,7 +46,7 @@
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
        </form>
         {% endif %}
-    </div>
+
     {% endblock %}
 
  <!-- Optional JavaScript -->

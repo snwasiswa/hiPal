@@ -20,11 +20,11 @@
 
 <body>
 {% block content %}
-<div class="container text-light">
+<div class="container bg-light">
 
     {% with lesson=unit.lesson %}
-    <h1 class="text-center text-light">Lesson "{{ lesson.title }}"</h1>
-    <div class="content text-center text-light">
+    <h1 class="text-center">Lesson "{{ lesson.title }}"</h1>
+    <div class="content text-center">
         <h3>Units</h3>
         <ul id="units">
             {% for u in lesson.units.all %}
@@ -48,7 +48,7 @@
         </div>
 
     </div>
-    <div class="unit text-center text-light">
+    <div class="unit text-center">
         <h2>Unit {{ unit.order|add:1 }} : {{ unit.title }}</h2>
         <h3>Unit Contents</h3>
         <div id="unit-contents">

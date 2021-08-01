@@ -12,43 +12,74 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!--Incorporated CSS-->
-    <link href="{% static 'languages/styles.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/languages.css' %}" type="text/css">
 
-
-    <title>HomePage</title>
+    <title>{% block title %}Base{% endblock %}</title>
 </head>
 
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand text-light" href="/">hiPal</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link text-light" href="/about">About<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/language">Learn a language</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/blog">Blog</a>
-                </li>
-            </ul>
-            <div class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Log in</button>
-                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Sign up</button>
+<body style="background-image: url('static/images/people.jpg'); background-size: 100% 100%;background-attachment: fixed;">
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light" href="/">hiPal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link text-light" href="/home">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="/blog">Blog</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0 text-light">
+                    {% if request.user.is_authenticated %}
+                    Hello, {{ request.user.first_name }}!
+                    <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
+                    {% else %}
+                    <a class="tex-light nav-item">
+                            Already have an account?
+                    </a>
+                    <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'instructor_login' %}">Sign in</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>
-    <div class="id">
-        <h1 class="tr"> Homepage Test</h1>
-        <p>This is where the rest of data goes...</p>
 
+{% block content %}
+    <div class="container text-light">
+        <div class="py-5 id text-center text-dark ">
+            <h1 class="py-5">Welcome to hiPal</h1>
+        </div>
+    <div class="text-light">
+
+        <div class="row">
+
+        <div class="col-sm my-3 pb-5 mx-5 pt-5 text-light " style="width:40%">
+          <h3 class="py-3">For Instructors</h3>
+             <p>Help students gain new skills in your favorite languages</p>
+            <div>
+            <a class="btn btn-primary" href="{% url 'instructor_registration' %}">Sign up</a>
+            </div>
+        </div>
+        <div class="col-sm my-3 pb-5 mx-5 pt-5 text-light" style="width:40%">
+          <h3 class="py-3">For Students</h3>
+             <p>Join over other students to learn new languages and practice new skills</p>
+            <div>
+            <a class="btn btn-primary" href="{% url 'student_registration' %}">Sign up</a>
+            </div>
+        </div>
+        </div>
     </div>
+    </div>
+    {% endblock %}
+
     <footer class=" text-center">
         <p class="py-3 my-0">
             © 2021 hiPal
@@ -67,6 +98,17 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            {% block domready %}
+            {% endblock %}
+        });
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </body>
 
 </html>

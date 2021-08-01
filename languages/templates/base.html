@@ -12,12 +12,12 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{% static 'css/languages.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'languages/styles.css' %}" type="text/css">
 
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
-<body style="background-color:black">
+<body style="background-color:#C8C8C8">
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand text-light" href="/">hiPal</a>
@@ -42,6 +42,9 @@
                     Hello, {{ request.user.first_name }}!
                     <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
                     {% else %}
+                    <a class="tex-light nav-item">
+                            Already have an account?
+                    </a>
                     <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'instructor_login' %}">Sign in</a>
                     {% endif %}
                 </div>

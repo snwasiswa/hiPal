@@ -14,12 +14,12 @@
 
     <!--Incorporated CSS-->
     {% load static %}
+    <link href="{% static 'blog/styles.css' %}" rel="stylesheet" type="text/css">
 
     <title>{% block title %}Share a post {% endblock %}</title>
 </head>
 
 <body>
-    <div class="container">
         {% block content %}
         {% if sent %}
         <h1>E-mail successfully sent</h1>
@@ -35,7 +35,7 @@
         </form>
         {% endif %}
         {% endblock %}
-    </div>
+
       <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

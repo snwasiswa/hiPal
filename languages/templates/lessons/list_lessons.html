@@ -26,7 +26,7 @@
 
 <body>
     {% block content %}
-    <div class="container text-light">
+    <div class="container bg-light">
 
         <div class="text-center text-light">
             <h1>
@@ -39,12 +39,12 @@
         </div>
 
         <div class="row">
-            <div class="col-sm my-3 pb-5 pt-5 bg-dark text-light">
+            <div class="col-sm my-3 pb-5 pt-5">
                 <h2>Languages</h2>
 
                 <p id="units">
                     {% for lang in languages %}
-                <ul {% if language == lang %} class="selected" {% endif %}>
+                <ul {% if language==lang %} class="selected" {% endif %}>
                     <a href="{% url 'lesson_list_language' lang.slug %}"> {{ lang.title }}
                         <br><span>{{ lang.total_lessons }} lessons</span>
                     </a>
@@ -56,7 +56,7 @@
                 </p>
 
             </div>
-            <div class="text-center col-sm my-3 pb-5 pt-5 bg-light text-dark">
+            <div class="text-center col-sm my-3 pb-5 pt-5">
                 {% for lesson in lessons %}
                 {% with language=lesson.language %}
                 <h3>

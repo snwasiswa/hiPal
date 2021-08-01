@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from django.views.generic.detail import DetailView
-from .models import Language, Lesson, Unit, Content
+from .models import Language, Lesson, Unit, Content, Profile
 from django.views.generic.list import ListView
 from django.views.generic.base import TemplateResponseMixin, View, TemplateView
 from django.urls import reverse_lazy

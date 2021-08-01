@@ -19,14 +19,11 @@
 
 <body>
     {% block content %}
-    <div class="container text-light">
-        <div class="py-3 id text-center text-primary">
-            <h1 class="py-5">Welcome to hiPal</h1>
+    <div class="container py-5">
+        <div class="py-5">
+            <h2 class="text-center"> Log in</h2>
         </div>
-        <div class="py-4">
-            <h3 class="text-center"> Log in</h3>
-        </div>
-    <div class="text-center text-light">
+    <div class="text-center">
         {% if form.errors %}
         <p>Password or username didn't match. Please enter correct password or username.</p>
         {% else %}
@@ -34,8 +31,8 @@
         {% endif %}
         <div class="row">
 
-        <div class="col-sm my-3 pb-5 mx-5 pt-5 text-light text-center bg-dark" style="width:50%">
-          <p class="text-primary">For Instructors</p>
+        <div class="col-sm my-3 pb-5 mx-5 pt-5 bg-light text-center " style="width:50%">
+          <h3 class="text-primary py-2">For Instructors</h3>
           <form method="post" class="form-group pt-5 pb-3" action="{% url 'instructor_login' %}" >
                 {{ form.as_p }}
                 {% csrf_token %}
@@ -48,8 +45,8 @@
             <a class="btn btn-primary" href="{% url 'instructor_registration' %}">Sign up</a>
             </div>
         </div>
-        <div class="col-sm my-3 mx-5 pb-5 pt-5 text-light text-center bg-dark">
-          <p class="text-primary">For Students</p>
+        <div class="col-sm my-3 mx-5 pb-5 pt-5 text-center bg-light">
+          <h3 class="text-primary py-2">For Students</h3>
           <form method="post" class="form-group pt-5 pb-3" action="login">
                 {{ form.as_p }}
                 {% csrf_token %}

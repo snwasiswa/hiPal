@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms.models import inlineformset_factory
-from .models import Unit, Lesson
+from .models import Unit, Lesson, Profile
 
 UnitFormSet = inlineformset_factory(Lesson,
                                     Unit,
@@ -31,3 +31,19 @@ class InstructorRegistrationForm(forms.ModelForm):
         if credentials['password'] != credentials['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return credentials['password2']
+
+
+class UserForm(forms.ModelForm):
+    """User form to allow users to manage their profiles"""
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email')
+
+
+class UserForm(forms.ModelForm):
+    """User form to allow users to manage their profiles, including their profile photo"""
+
+    class Meta:
+        model = Profile
+        fields = ('photo',)

@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.template.loader import render_to_string
 from .fields import OrderOfField
+from django.conf import settings
 
 
 # Create your models here.
@@ -101,3 +102,11 @@ class Video(BaseModel):
     """This is the model for a video"""
     file = models.FileField(upload_to='videos')
     url = models.URLField()
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+
+    def __str__(self):
+        return f'Profile for user {self.user.username}'
