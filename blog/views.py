@@ -25,7 +25,7 @@ def blog_post_list(request, slug_tag=None):
 
     if slug_tag:
         tag = get_object_or_404(Tag, slug=slug_tag)
-        post_list = BlogPost.objects_published.all.filter(tags_in=[tag])
+        post_list = post_list.filter(tags__in=[tag])
     # Create Paginator object
     paginate_posts = Paginator(post_list, 4)
     page = request.GET.get('page')
