@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-{% extends 'base.html' %}
+{% extends 'studentbase.html' %}
 {% load static %}
 
 <head>
@@ -8,12 +8,13 @@
 </head>
 
 <body>
-    {% block content %}
-    <div class="container">
-           <div class="text-center text-light">
-        <h1>Lessons</h1>
-    </div>
-     <div class="text-center text-light">
+   {% block content %}
+    <div class="container bg-light">
+
+           <div class="text-center">
+              <h1>Lessons</h1>
+           </div>
+     <div class="text-center">
          {% for lesson in object_list %}
          <div>
             <h3>{{ lesson.title }}</h3>
@@ -21,16 +22,17 @@
                 </p>
          </div>
          {% empty %}
-         <p class="text-light">
+         <p>
              You need to be enrolled in to gain access to any of the contents.
              <a href="{% url 'lesson_list' %}"> You can browse lessons</a>
                 for enrollment.
          </p>
          {% endfor %}
      </div>
-    </div>
 
-    {% endblock %}
+    </div>
+{% endblock %}
+
 </body>
 
 </html>

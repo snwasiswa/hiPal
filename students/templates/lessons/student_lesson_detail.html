@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-{% extends 'base.html' %}
+{% extends 'studentbase.html' %}
 {% load static %}
 
 <head>
@@ -10,14 +10,14 @@
 <body>
     {% block content %}
         <h1 class="text-center">
-            {{ object.title }}
+            {{ unit.title }}
         </h1>
         <div class="unit text-center">
             <h3>Units</h3>
             <ul id="units">
                 {% for i in object.units.all %}
                   <li data-id="{{ i.id }}" {% if i == unit %} class="selected" {% endif %}>
-                      <a href="{% url 'student_lesson_detail_unit' object.id i.id %}">
+                      <a href="{% url 'student_lesson_details_unit' object.id i.id %}">
                           <span>
                               Unit <span class="order">{{ i.order|add:1 }}</span>
                           </span>

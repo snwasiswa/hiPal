@@ -116,9 +116,6 @@ class StudentLessonDetailView(DetailView):
         if 'unit_id' in args:
             # current unit
             context['unit'] = units.get(id=args['unit_id'])
-        else:
-            # first unit
-            context['unit'] = units.all()[0]
 
         return context
 

@@ -34,10 +34,10 @@
             </p>
             {{ object.outline|linebreaks }}
             {% if request.user.is_authenticated %}
-            <form method="POST" action="{% url 'enrollment' %}">
+            <form action="{% url 'enrollment' %}" method="POST">
                 {{ enroll_form }}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Enroll Now</button>
+                <input type="submit" class="btn btn-primary" value="Enroll Now">
             </form>
             {% else %}
                 <a href="{% url 'student_registration' %}" class="btn btn-primary">Register to enroll</a>

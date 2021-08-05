@@ -93,7 +93,7 @@ navbar-brand{
   }
 
 .main, .sidebar {
-    border: 2px solid black;
+    border: 2px solid blue;
     padding: 5px;
     background-color: #fff;
   }
@@ -101,7 +101,7 @@ navbar-brand{
   .main {
     width: 71%;
     height: 150vh;
-    border: 2px solid black;
+    border: 2px solid blue;
   }
   
   .sidebar {
