@@ -76,8 +76,8 @@ class BaseModel(models.Model):
         abstract = True
 
     def render(self):
-        """Renders template and returns contents as a string"""
-        return render_to_string(f'languages/contents/{self.meta.model_name}.html', {'item': self})
+        """Renders dynamically generated templates and returns contents as a string"""
+        return render_to_string(f'contents/{self._meta.model_name}.html', {'item': self})
 
     def __str__(self):
         return self.title

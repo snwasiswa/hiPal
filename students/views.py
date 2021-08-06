@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
@@ -62,6 +63,8 @@ def register(request):
             new_student = student_form.save(commit=False)
             new_student.set_password(student_form.cleaned_data['password1'])
             new_student.save()
+            group = Group.objects.get(name='Students')
+            new_student.groups.add(group)  # Add to student to specific group
 
             return HttpResponseRedirect(reverse_lazy('student_lesson_list'))
 

@@ -21,7 +21,7 @@ from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 from blog.sitemaps import BlogPostSitemap
 import languages
-from languages.views import CustomLogoutView
+from languages.views import custom_logout_view
 
 sitemaps = {
     'posts': BlogPostSitemap,
@@ -33,8 +33,8 @@ urlpatterns = [
                   path('', include('languages.urls')),
                   path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
                   # path('accounts/login/', views.LoginView.as_view(), name='login'),
-                  # path('accounts/logout/', languages.views.CustomLogoutView.as_view(), name='logout'),
-                  path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
+                  path('accounts/logout/', languages.views.custom_logout_view, name='logout'),
+                  # path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
                   path('', include('students.urls')),
                   path('messaging/', include('message_chat.urls', namespace='message_chat')),
                   path('restapi/', include('languages.restapi.urls', namespace='restapi')),

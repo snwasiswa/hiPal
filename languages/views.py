@@ -2,7 +2,7 @@ from django.contrib.auth.models import Group
 from django.db.models import Count
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views.generic.detail import DetailView
 from .models import Language, Lesson, Unit, Content, Profile
 from django.views.generic.list import ListView
@@ -100,7 +100,14 @@ class LessonDeleteView(CreatorLessonMixin, DeleteView):
 
 
 def homepage(request):
-    # return HttpResponse("This is my homepage(/)")
+    """Returns HttpResponse"""
+    if request.user.is_authenticated:
+
+        if request.user.groups.filter(name = 'Instructors').exists():
+            return HttpResponseRedirect(reverse_lazy('lessons_list'))
+        else:
+            return HttpResponseRedirect(reverse_lazy('student_lesson_list'))
+
     return render(request, 'homepage.html')
 
 
@@ -239,7 +246,7 @@ class DeleteContentView(View):
         unit = content.unit
         content.item.delete()
         content.delete()
-        return redirect('unit_content', unit.id)
+        return redirect('unit_content_list', unit.id)
 
 
 class ContentListView(TemplateResponseMixin, View):
@@ -297,6 +304,8 @@ def instructor_registration(request):
     return render(request, 'registration/instructor_registration.html', {'instructor_form': instructor_form})
 
 
-class CustomLogoutView(TemplateView):
-    """Custom Log out View"""
-    template_name = 'registration/logout.html'
+def custom_logout_view(request):
+    """Custom Log out request"""
+
+    logout(request)
+    return render(request, 'registration/logout.html')
