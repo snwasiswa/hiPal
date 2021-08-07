@@ -102,8 +102,7 @@ class LessonDeleteView(CreatorLessonMixin, DeleteView):
 def homepage(request):
     """Returns HttpResponse"""
     if request.user.is_authenticated:
-
-        if request.user.groups.filter(name = 'Instructors').exists():
+        if request.user.groups.filter(name='Instructors').exists():
             return HttpResponseRedirect(reverse_lazy('lessons_list'))
         else:
             return HttpResponseRedirect(reverse_lazy('student_lesson_list'))

@@ -43,7 +43,7 @@
                     <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
                     {% else %}
                     <a class="tex-light nav-item">
-                            Already have an account?
+                        Already have an account?
                     </a>
                     <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'instructor_login' %}">Sign in</a>
                     {% endif %}
@@ -51,6 +51,53 @@
             </div>
         </div>
     </nav>
+
+    <div class="container-fluid">
+
+
+
+            <ul class="navbar-nav mr-auto">
+                <div class="sidenav" id="customSidenav">
+
+                       <a class="navbar-brand text-light" href="/">hiPal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+                <li>
+                    <a href="javascript:void(0)" class="closeout" onclick="navClosed()">&times;</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link text-light" href="/home">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/blog">Blog</a>
+                </li>
+
+                     <div class="form-inline my-2 my-lg-0 text-light">
+                {% if request.user.is_authenticated %}
+                Hello, {{ request.user.first_name }}!
+                <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
+                {% else %}
+                <a class="tex-light nav-item">
+                    Already have an account?
+                </a>
+                <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'instructor_login' %}">Sign in</a>
+                {% endif %}
+            </div>
+                </div>
+
+
+        </ul>
+        </div>
+    </div>
+
+    <!-- Use any element to open the sidenav -->
+    <span style="font-size:30px;cursor:pointer" onclick="navOpened()">&#9776; Menu</span>
 
 
     <div id="content">
@@ -87,6 +134,18 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        /* Set width of the side navigation and main to 240 px */
+        function navOpened() {
+            document.getElementById("customSidenav").style.width = "240px"
+        }
+
+        /* Set width of the side navigation and main to 0 */
+        function navClosed() {
+            document.getElementById("customSidenav").style.width = "0"
+        }
+    </script>
 </body>
 
 </html>

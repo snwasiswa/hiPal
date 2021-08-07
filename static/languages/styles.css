@@ -34,6 +34,52 @@ h1,h2,h3,h4,h5, h6 {
 
 }
 
+/* Navigation menu */
+.sidenav {
+    
+    background-color: #111;
+    padding-top: 65px;
+    transition: 0.5s;
+    position: fixed;
+    width: 0;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+
+}
+
+
+/* Navigation menu links */
+.sidenav a {
+    text-decoration: none !important;
+    color:black;
+    display: block;
+    padding: 8px 8px 8px 32 px;
+    transition: 0.5s;
+    font-size: 25px;
+    
+}
+
+/* Change the color when the mouse over the navigation links */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Style for the closing button */
+.sidenav .closeout {
+    top: 0;
+    float: right;
+    font-size: 25px;
+    position: absolute;
+    margin-left: 50px;
+    color: white;
+    right: 25px;
+
+}
+
+
 h1 {
     margin: 0 0 20px;
     font-weight: 300;
@@ -102,6 +148,19 @@ navbar-brand{
     width: 80%;
     height: 150vh;
     border: 2px solid black;
+    transition: margin-left .5s;
+    padding: 20 px;
+
+  }
+/* Updates styles when the size of the screen is below 450px */
+  @media screen and (max-height: 450px){
+      .sidenav {
+          padding-top: 14px;
+      }
+
+      .sidenav a {
+          font-size: 16px
+      }
   }
   
   .sidebar {
