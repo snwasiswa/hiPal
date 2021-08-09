@@ -21,18 +21,60 @@
 
 <body>
 
-{% block content %}
-<div class="container text-center bg-light">
-    <div>
-        <h2 class="py-5">Messaging</h2>
-        <div class="py-5">
-            <input id="text-input" type="text">
+    {% block content %}
+    <div class="container text-center bg-light">
+        <div>
+            <h2 class="py-5">Messaging</h2>
+            <div class="py-5">
+                <input id="text-input" type="text">
+            </div>
+            <input id="text-submit" class="btn btn-primary" type="submit" value="Send">
         </div>
-        <button id="text-submit" class="btn btn-primary">Send</button>
     </div>
-</div>
 
-{% endblock %}
+    {% endblock %}
+
+    {% block domready %}
+    var url = 'ws://' + window.location.host + '/ws/messaging/room/' + '{{ lesson.id }}/';
+    var messagingSocket = new WebSocket(url);
+
+    messagingSocket.onmessage = function(e) {
+    var data = JSON.parse(e.data);
+    var message = data.message;
+
+    var $messaging = $('#messaging');
+    $messaging.append('<div> class="message">' + message + '</div>');
+    $messaging.scrollTop($messaging[0].scrollHeight);
+    };
+
+    messagingSocket.onclose = function(e) {
+    console.error('Messaging Socket closed');
+    };
+
+    var $input = $('text-input');
+    var $submit = $('text-submit');
+
+    $submit.click(function() {
+    var message = $input.val();
+    if (message) {
+    // send message
+    messageSocket.send(JSON.stringify({'message': message}));
+    // clear input
+    $ input.val('');
+    // return focus
+    $input.focus();
+    }
+    });
+
+    $input.focus();
+    $input.keyup(function(e) {
+    if (e.which == 13) {
+    // submit with return / enter key
+    $submit.click();
+    }
+    });
+
+    {% endblock %}
 
 
     <!-- Optional JavaScript -->
@@ -48,12 +90,6 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            {% block domready %}
-            {% endblock %}
-        });
-    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

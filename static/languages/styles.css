@@ -37,7 +37,7 @@ h1,h2,h3,h4,h5, h6 {
 /* Navigation menu */
 .sidenav {
     
-    background-color: #111;
+    background-color:black;
     padding-top: 65px;
     transition: 0.5s;
     position: fixed;
@@ -170,4 +170,10 @@ navbar-brand{
     position: sticky;
     top: 0;
 
+  }
+
+  .form-inline .form-group {
+    vertical-align:bottom;
+    position: absolute; 
+    bottom: 0;
   }
