@@ -40,7 +40,8 @@
                      <input class="btn btn-primary" type="submit" name="next" value="Log in" />
                 </p>
             </form>
-             <p>Don't have an account!</p>
+              <p class="text-left"><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+             <p>Don't have an account?</p>
             <div>
             <a class="btn btn-primary" href="{% url 'instructor_registration' %}">Sign up</a>
             </div>
@@ -54,7 +55,7 @@
                      <input class="btn btn-primary" type="submit" name="next" value="Log in" />
                 </p>
             </form>
-             <p>Don't have an account!</p>
+             <p>Don't have an account?</p>
             <div>
             <a class="btn btn-primary" href="{% url 'student_registration' %}">Sign up</a>
             </div>

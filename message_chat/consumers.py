@@ -9,12 +9,15 @@ class Consumer(WebsocketConsumer):
         """Allows connection"""
         self.accept()
 
-    def receive(self, text_data):
-        """Receive connection"""
-        # Send message to websockets
-        self.send(text_data=json.dumps({'message': json.loads(text_data)['message']}))
-
     def disconnect(self, close_code):
         pass
 
+    def receive(self, text_data):
+        """Receive connection"""
+        text_data_json = json.loads(text_data)
+        message = text_data_json['message']
+
+        self.send(text_data=json.dumps({
+            'message': message
+        }))
 

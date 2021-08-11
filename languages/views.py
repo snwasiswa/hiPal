@@ -308,3 +308,4 @@ def custom_logout_view(request):
 
     logout(request)
     return render(request, 'registration/logout.html')
+
