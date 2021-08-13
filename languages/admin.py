@@ -29,5 +29,6 @@ class AdminProfile(admin.ModelAdmin):
     """Register the model with specific fields"""
     list_display = ['user', 'photo']
 
+
 # Use memcache admin index site
 admin.site.index_template = 'memcache_status/admin_index.html'

@@ -41,7 +41,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'first_name', 'last_name', 'email')
 
 
-class UserForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
     """User form to allow users to manage their profiles, including their profile photo"""
 
     class Meta:

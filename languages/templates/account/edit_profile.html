@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+
+<head>
+        <!-- Required meta templatetags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!--Incorporated CSS-->
+    <link rel="stylesheet" href="{%static 'css/languages.css'%}" type="text/css">
+
+    <title>{% block title %}Edit profile{% endblock %}</title>
+</head>
+
+<body>
+<div class="container">
+    {% block content %}
+    <div class="container text-center bg-light">
+        <h1>Edit your account"</h1>
+        <p>Use the following form to edit your account:</p>
+        <div>
+            <form enctype="multipart/form-data" method="post">
+                {{ user_form.as_p }}
+                {{ user_profile_form.as_p }}
+                {% csrf_token %}
+                <p><input type="submit" class="btn btn-primary" value="Save"></p>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+</div>
+
+</body>
+
+</html>
