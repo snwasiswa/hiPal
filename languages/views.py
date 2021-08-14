@@ -325,7 +325,7 @@ def edit_profile(request):
         if user_form.is_valid() and user_profile_form.is_valid():
             user_form.save()
             user_profile_form.save()
-            messages.success(request, 'Profile has been successfully uploaded')
+            messages.success(request, 'Profile has been successfully updated')
         else:
             messages.error(request, 'Error updating your profile')
 

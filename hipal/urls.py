@@ -39,7 +39,8 @@ urlpatterns = [
                   path('', include('students.urls')),
                   path('messaging/', include('message_chat.urls', namespace='message_chat')),
                   path('restapi/', include('languages.restapi.urls', namespace='restapi')),
-                  path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
+                  path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+                  path('social-auth/', include('social_django.urls', namespace='social-auth')),
 
 
                   # path('accounts/', include('django.contrib.auth.urls')),
