@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <!--Required for Font Awesome Icons-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 
     <!--Incorporated CSS-->
       <link rel="stylesheet" href="{% static 'languages/styles.css'%}" type="text/css">
@@ -45,17 +47,10 @@
             </form>
             <div class="text-center">
                   <p>or connect with</p>
-                    <i class="fab fa-google fa-6x"></i>
                    <p>
+                       <i class="fa fa-google text-primary" style="font-size:36px";></i>
                        <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
                    </p>
-                   <p>
-                        <a href="{% url 'social:begin' 'google-oauth2' %}">Facebook</a>
-                   </p>
-                   <p>
-                       <a href="{% url 'social:begin' 'google-oauth2' %}">Apple</a>
-                   </p>
-
             </div>
 
               <p class="text-left"><a href="{% url 'password_reset' %}">Forgot your password?</a></p>

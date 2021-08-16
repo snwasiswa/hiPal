@@ -4,20 +4,20 @@
 {% load static %}
 
 <head>
+    <link rel="stylesheet" href="{% static 'languages/styles.css' %}" type="text/css">
     <title>{% block title %} Lessons {% endblock %} </title>
 </head>
 
 <body>
    {% block content %}
     <div class="container bg-light">
-
-           <div class="text-center">
-              <h1>Lessons</h1>
+           <div class="text-center py-3">
+              <h1 class="title">Lessons</h1>
            </div>
      <div class="text-center">
          {% for lesson in object_list %}
          <div>
-            <h3>{{ lesson.title }}</h3>
+            <h2>{{ lesson.title }}</h2>
                 <p><a href="{% url 'student_lesson_details' lesson.id %}">Get access to contents</a>
                 </p>
          </div>

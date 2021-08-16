@@ -13,19 +13,18 @@
             {{ unit.title }}
         </h1>
         <div class="unit text-center">
-            <h3>Units</h3>
-            <ul id="units">
+            <h2>Units</h2>
                 {% for i in object.units.all %}
-                  <li data-id="{{ i.id }}" {% if i == unit %} class="selected" {% endif %}>
+                  <ul data-id="{{ i.id }}" {% if i == unit %} class="selected" {% endif %}>
                       <a href="{% url 'student_lesson_details_unit' object.id i.id %}">
                           <span>
                               Unit <span class="order">{{ i.order|add:1 }}</span>
                           </span>
                           <br>{{ i.title }}
                       </a>
-                  </li>
+                  </ul>
                 {% empty %}
-                <li> There are no units yet</li>
+                <ul> There are no units yet</ul>
                 {% endfor %}
             </ul>
         </div>

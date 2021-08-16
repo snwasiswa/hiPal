@@ -17,10 +17,18 @@
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
-<body style="background-image: url('static/images/people1.jpg'); background-size: 100% 100%;background-attachment: fixed;">
+<body style="background-image: url('static/images/sunset.jpg'); background-size: 100% 100%;background-attachment: fixed;">
+<!--Photo by <a href="https://unsplash.com/@jaredd_craig?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+    Jaredd Craig</a> on <a href="https://unsplash.com/s/photos/education?utm_source=unsplash&utm_medium=referral&
+    utm_content=creditCopyText">Unsplash</a>
+    Photo by <a href="https://unsplash.com/@aaronburden?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+    Aaron Burden</a> on <a href="https://unsplash.com/s/photos/online-education?utm_source=unsplash&utm_medium=
+    referral&utm_content=creditCopyText">Unsplash</a>
+  -->
+
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light" href="/">hiPal</a>
+            <a class="navbar-brand text-light" href="/home">hiPal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link text-light" href="/homepage">Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link text-light" href="/home">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-light" href="/about">About</a>
@@ -55,7 +63,7 @@
 {% block content %}
 
     <div class="container text-light">
-        <div class="py-5 id text-center text-dark ">
+        <div class="py-5 id text-center">
             <h1 class="py-5">Welcome to hiPal</h1>
         </div>
     <div class="text-light">

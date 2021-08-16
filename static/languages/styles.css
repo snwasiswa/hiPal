@@ -172,6 +172,15 @@ navbar-brand{
 
   }
 
+  .profile-picture {
+
+ width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #000;
+
+}
+
   .form-inline .form-group {
     vertical-align:bottom;
     position: absolute; 
@@ -179,9 +188,17 @@ navbar-brand{
   }
 
 .fa-google {
-  background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+  background:
+    linear-gradient(to bottom left,transparent 49%,#fbbc05 50%) 0 25%/48% 40%,
+    linear-gradient(to top    left,transparent 49%,#fbbc05 50%) 0 75%/48% 40%,
+
+    linear-gradient(-40deg ,transparent 53%,#ea4335 54%),
+    linear-gradient( 45deg ,transparent 46%,#4285f4 48%),
+    #34a853;
+  background-repeat:no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
+
