@@ -20,7 +20,7 @@
 <body style="background-color:#C8C8C8">
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light" href="/home">hiPal</a>
+            <a class="navbar-brand text-light mx-3" href="/home">hiPal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,21 +28,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link text-light" href="/home">Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link text-light mx-3" href="/home">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="/about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="/blog">Blog</a>
+                        <a class="nav-link text-light mx-3" href="/blog">Blog</a>
                     </li>
                 </ul>
                 <div class="form-inline my-2 my-lg-0 text-light">
-                    {% if request.user.is_authenticated %}
-                    Hello, {{ request.user.first_name }}!
+                     {% if request.user.is_authenticated %}
+                        <a class=text-light py-3 mx-3>
+                            Hello, {{ request.user.first_name }}!
+                        </a>
                     <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
                     {% else %}
-                    <a class="tex-light nav-item">
+                    <a class="tex-light nav-item mx-3">
                             Already have an account?
                     </a>
                     <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'instructor_login' %}">Sign in</a>

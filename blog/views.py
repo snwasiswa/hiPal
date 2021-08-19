@@ -38,10 +38,14 @@ def blog_post_list(request, slug_tag=None):
         # Deliver last page
         posts = paginate_posts.page(paginate_posts.num_pages)
 
+    total_posts = [i for i in range(len(posts))]
+
+    post_data = zip(posts, total_posts)
     # Return HTTP response
     return render(request, 'posts/blog_post_list.html', {'posts': posts,
                                                          'page': page,
-                                                         'tag': tag})
+                                                         'tag': tag,
+                                                         'post_data': post_data})
 
 
 def blog_post_detail(request, year, month, day, post):
