@@ -14,6 +14,7 @@
 
     <!--Incorporated CSS-->
     <link rel="stylesheet" href="{% static 'languages/styles.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/styles.css' %}" type="text/css">
 
     <title>{% block title %}Base{% endblock %}</title>
 </head>
@@ -71,13 +72,15 @@
 
      <div class="container">
         <div class="wrapper">
-            <div class="main">
+            <div class="blogmain">
+
                 {% block content %}
                 {% endblock %}
             </div>
 
-            <div class="sidebar">
-                <h2>Posts</h2>
+            <div class="blogsidebar ml-5 my-5">
+                <div class="my-5">
+                    <h2>Posts</h2>
                 <p>{% total_posts %} posts written so far.</p>
                 <h3>Latest posts</h3>
                 {% latest_posts 4 %}
@@ -93,6 +96,8 @@
                 <p>
                     <a href="{% url 'blog:feed' %}" class="text-warning">Subscribe to my RSS feed</a>
                 </p>
+                </div>
+
             </div>
         </div>
     </div>
