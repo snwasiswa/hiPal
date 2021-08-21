@@ -11,4 +11,4 @@
 
 ### Source Code
 
-[Click here for source code](https://github.com/snwasiswa/hiPal/tree/master/src)
+[Click here for source code](https://github.com/snwasiswa/hiPal)
