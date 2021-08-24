@@ -9,9 +9,14 @@
 
 <body>
     {% block content %}
-        <h1 class="text-center">
+    <div class="container bg-light">
+        <div class="py-5">
+                    <h1 class="title py-3 text-center">
             {{ unit.title }}
         </h1>
+        </div>
+
+
         <div class="unit text-center">
             <h2>Units</h2>
                 {% for i in object.units.all %}
@@ -36,6 +41,8 @@
               {% endwith %}
             {% endfor %}
         </div>
+    </div>
+
     {% endblock %}
 </body>
 

@@ -15,14 +15,14 @@
 
     <!--Custom CSS-->
    <link href="{% static 'languages/styles.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'blog/styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'blog/blogstyles.css' %}" rel="stylesheet" type="text/css">
 
     <title>{% block title %} My Post list {% endblock %}</title>
 </head>
 
 <body>
     {% block content %}
-    <h1 class="text-center py-5">Posts</h1>
+    <h1 class="text-center py-5 text-primary">Posts</h1>
     {% if tag %}
     <h2>Below are the posts tagged with "{{ tag.name }}"</h2>
     {% endif %}
@@ -42,7 +42,7 @@
                         {% if not forloop.last %},
                         {% endif %}
                         {% endfor %}
-                    <p class="date">Posted on {{ post.published_date}} by {{ post.author }}</p>
+                    <p id="date">Published on {{ post.published_date}} by {{ post.author.first_name }} {{ post.author.last_name }}</p>
                     <p class="card-text">{{ post.blog_body|markdown|truncatewords_html:40}}</p>
 
                     <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read more</a>

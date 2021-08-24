@@ -15,16 +15,17 @@
 
     <!--Custom CSS-->
      <link href="{% static 'languages/styles.css' %}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{% static 'blog/styles.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/blogstyles.css' %}" type="text/css">
 
     <title>{% block title %} {{ post.title} {% endblock %}</title>
 </head>
 
 <body>
     {% block content %}
-        <h1>{{ post.title }}</h1>
-        <p>
-            Posted on {{ post.published_date }} by {{ post.author }}
+    <div class="py-5">
+        <h1 class="text-primary">{{ post.title }}</h1>
+        <p id="date">
+            Published on {{ post.published_date }} by {{ post.author.first_name }} {{ post.author.last_name }}
         </p>
         {{ post.blog_body|markdown }}
         <p>
@@ -54,7 +55,7 @@
             <button type="submit" value="Send e-mail">Add comment</button>
         </form>
         {% endif %}
-        <div>
+        <div class="py-5">
             <h2>Most similar</h2>
             {% for post in identical_posts %}
             <p>
@@ -64,6 +65,7 @@
             No similar or identical posts yet
             {% endfor %}
         </div>
+    </div>
 
     {% endblock %}
 

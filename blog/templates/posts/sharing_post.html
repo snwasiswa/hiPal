@@ -14,13 +14,14 @@
 
      <!--Custom CSS-->
     <link href="{% static 'languages/styles.css' %}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{% static 'blog/styles.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'blog/blogstyles.css' %}" type="text/css">
 
     <title>{% block title %}Share a post {% endblock %}</title>
 </head>
 
 <body>
         {% block content %}
+        <div class="py-5">
         {% if sent %}
         <h1>E-mail successfully sent</h1>
         <p>
@@ -34,6 +35,7 @@
             <button type="submit" value="Send e-mail">Send e-mail</button>
         </form>
         {% endif %}
+        </div>
         {% endblock %}
 
       <!-- Optional JavaScript -->
@@ -50,7 +52,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
+          $(document).ready(function () {
             {% block domready %}
             {% endblock %}
         });
