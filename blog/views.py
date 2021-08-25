@@ -27,7 +27,7 @@ def blog_post_list(request, slug_tag=None):
         tag = get_object_or_404(Tag, slug=slug_tag)
         post_list = post_list.filter(tags__in=[tag])
     # Create Paginator object
-    paginate_posts = Paginator(post_list, 4)
+    paginate_posts = Paginator(post_list, 9)
     page = request.GET.get('page')
     try:
         posts = paginate_posts.page(page)
@@ -38,7 +38,7 @@ def blog_post_list(request, slug_tag=None):
         # Deliver last page
         posts = paginate_posts.page(paginate_posts.num_pages)
 
-    total_posts = [i for i in range(len(posts))]
+    total_posts = [i for i in range(len(posts)) ]
 
     post_data = zip(posts, total_posts)
     # Return HTTP response

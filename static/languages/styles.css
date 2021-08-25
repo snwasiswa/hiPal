@@ -107,7 +107,7 @@ navbar-brand{
   }
 
 .main, .sidebar {
-    border: 2px solid black;
+    border: none;
     padding: 5px;
     background-color: #fff;
   }
@@ -115,7 +115,7 @@ navbar-brand{
   .main {
     width: 80%;
     height: 150vh;
-    border: 2px solid black;
+    border: none;
     transition: margin-left .5s;
     padding: 20 px;
 
@@ -132,12 +132,13 @@ navbar-brand{
   }
 
   .sidebar {
-    width: 28%;
+    width: 25%;
     height: 100%;
     position:-webkit-sticky;
     position: sticky;
     top: 0;
-
+    background-color: black;
+    float:left;
 
   }
 
