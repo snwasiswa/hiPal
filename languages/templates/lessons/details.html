@@ -22,11 +22,11 @@
     <div class="container bg-light">
 
         {% with language=object.language %}
-        <h1 class="text-center">
+        <h1 class="title text-center">
             {{ object.title }}
         </h1>
         <div class="unit text-center">
-            <h2>Outline</h2>
+            <h2>Lesson Outline</h2>
             <p>
                <a href="{% url 'lesson_list_language' language.slug %}"> {{ language.title }}</a>
                  {{ object.units.count }} units.
@@ -40,7 +40,12 @@
                 <input type="submit" class="btn btn-primary" value="Enroll Now">
             </form>
             {% else %}
-                <a href="{% url 'student_registration' %}" class="btn btn-primary">Register to enroll</a>
+            <p>
+               <a href="{% url 'student_registration' %}" class="btn btn-primary">Register to enroll</a> or
+                <a href="{% url 'instructor_login' %}" class="btn btn-primary">
+                Login to enroll
+            </a>
+            </p>
             {% endif %}
         </div>
        {% endwith %}
