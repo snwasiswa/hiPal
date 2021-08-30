@@ -27,7 +27,7 @@
 
 <body>
     {% block content %}
-    <div class="container bg-light">
+    <div class="container bg-secondary">
 
         <div class="text-center">
             <h1 class="title">
@@ -61,10 +61,10 @@
                 <h3>
                     <a href="{% url 'lesson_detail' lesson.slug %}"> {{ lesson.title }}</a>
                 </h3>
-                <p>
+                <p class="text-secondary">
                     <a href="{% url 'lesson_list_language' language.slug %}"> {{ language }}</a>
                     {{ lesson.total_units }} units.
-                    Teacher, Instructor, Trainer : {{ lesson.creator.get_full_name }}
+                    Instructor: {{ lesson.creator.get_full_name }}
                 </p>
                 {% endwith %}
                 {% endfor %}
