@@ -180,3 +180,16 @@ navbar-brand{
   
 }
 
+.maincontent{
+   height: 100%;
+   width: 100%;
+}
+
+#unit-form{
+   height:100%;
+   width: 6%;
+   margin-left: 30%;
+   text-align: center;
+   display:inline-block;
+
+}

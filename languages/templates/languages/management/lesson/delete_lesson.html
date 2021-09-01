@@ -13,15 +13,14 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{%static 'css/languages.css'%}" type="text/css">
+    <link rel="stylesheet" href="{%static 'languages/styles.css'%}" type="text/css">
 
     <title>{% block title %}Delete lesson{% endblock %}</title>
 </head>
 
 <body>
-<div class="container">
     {% block content %}
-    <div class="container text-center bg-light">
+    <div class="container bg-light main content text-center">
         <h1>Delete lesson "{{ object.title }}"</h1>
         <div class="module">
             <form action="" method="post">
@@ -32,7 +31,6 @@
         </div>
     </div>
     {% endblock %}
-</div>
 
 </body>
 

@@ -13,27 +13,32 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{% static 'css/languages.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'languages/styles.css' %}" type="text/css">
     <title>{% block title %} Edit "{{ lesson.title }}" {% endblock%}</title>
 </head>
 
 <body>
-<div class="container bg-light">
-     {% block content %}
+ {% block content %}
+<div class="container bg-light maincontent text-center">
     <div class="text-center">
         <h1>Edit "{{ lesson.title }}"</h1>
-        <div class="unit">
+        <div class="justify-content-center py-3">
             <h2>Lesson Units</h2>
-            <form method="post">
+
+                <form method="post" class="text-center">
+                    <div id="unit-form" class="py-3">
                 {{ formset }}
                 {{ formset.management_form }}
                 {% csrf_token %}
+                    </div>
                 <button type="submit" class="btn btn-primary">Save Units</button>
             </form>
         </div>
+        </div>
+
     </div>
-    {% endblock%}
 </div>
+{% endblock%}
 </body>
 
 </html>
