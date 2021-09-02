@@ -11,34 +11,34 @@
     {% block content %}
     <div class="container bg-light">
         <div class="py-5">
-                    <h1 class="title py-3 text-center">
-            {{ unit.title }}
-        </h1>
+            <h1 class="title py-3 text-center">
+                {{ unit.title }}
+            </h1>
         </div>
 
 
         <div class="unit text-center">
             <h2>Units</h2>
-                {% for i in object.units.all %}
-                  <ul data-id="{{ i.id }}" {% if i == unit %} class="selected" {% endif %}>
-                      <a href="{% url 'student_lesson_details_unit' object.id i.id %}">
-                          <span>
-                              Unit <span class="order">{{ i.order|add:1 }}</span>
-                          </span>
-                          <br>{{ i.title }}
-                      </a>
-                  </ul>
-                {% empty %}
-                <ul> There are no units yet</ul>
-                {% endfor %}
+            {% for i in object.units.all %}
+            <ul data-id="{{ i.id }}" {% if i==unit %} class="selected" {% endif %}>
+                <a href="{% url 'student_lesson_details_unit' object.id i.id %}">
+                    <span>
+                        Unit <span class="order">{{ i.order|add:1 }}</span>
+                    </span>
+                    <br>{{ i.title }}
+                </a>
+            </ul>
+            {% empty %}
+            <ul> There are no units yet</ul>
+            {% endfor %}
             </ul>
         </div>
         <div class="unit text-center">
             {% for content in unit.contents.all %}
-              {% with i=content.item %}
-                 <h2>{{ i.title }}</h2>
-                 {{ i.render }}
-              {% endwith %}
+            {% with i=content.item %}
+            <h2>{{ i.title }}</h2>
+            {{ i.render }}
+            {% endwith %}
             {% endfor %}
         </div>
     </div>
