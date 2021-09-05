@@ -14,6 +14,7 @@ class Language(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
+        app_label = 'languages'
         ordering = ['title']
 
     def __str__(self):
@@ -31,6 +32,7 @@ class Lesson(models.Model):
     student = models.ManyToManyField(User, related_name='lessons_joined', blank=True)
 
     class Meta:
+        app_label = 'languages'
         ordering = ['-created_on']
 
     def __str__(self):
@@ -47,6 +49,7 @@ class Unit(models.Model):
         return f'{self.order}. {self.title}'
 
     class Meta:
+        app_label = 'languages'
         ordering = ['order']
 
 
@@ -62,6 +65,7 @@ class Content(models.Model):
     order = OrderOfField(blank=True, for_fields=['unit'])
 
     class Meta:
+        app_label = 'languages'
         ordering = ['order']
 
 
@@ -73,6 +77,7 @@ class BaseModel(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
+        app_label = 'languages'
         abstract = True
 
     def render(self):

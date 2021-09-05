@@ -9,6 +9,9 @@ from taggit.managers import TaggableManager
 class PublishedPostManager(models.Manager):
     """Custom Blog Post Manager to manage posts"""
 
+    class Meta:
+        app_label = 'blog'
+
     def get_queryset(self):
         return super(PublishedPostManager, self).get_queryset().filter(status='published')
 
@@ -30,7 +33,9 @@ class BlogPost(models.Model):
     tags = TaggableManager()
 
     class Meta:
+        app_label = 'blog'
         ordering = ('-published_date',)
+
 
     def __str__(self):
         return self.title
@@ -54,6 +59,7 @@ class Comment(models.Model):
     active = models.BooleanField(default=True)
 
     class Meta:
+        app_label = 'blog'
         ordering = ('created_date', )
 
     def __str__(self):
