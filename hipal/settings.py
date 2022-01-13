@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+SECRET_KEY ='django-insecure-tfdrxfneg7&uwt8uw0atqg7gzp-&!)g^zfcoi!70c&5jwny!as'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -34,9 +34,9 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
 
-    'students.apps.StudentsConfig',
-    'languages.apps.LanguagesConfig',
-    'blog.apps.BlogConfig',
+    'students',
+    'languages',
+    'blog',
     'embed_video',
     'memcache_status',
     'rest_framework',
@@ -142,8 +142,6 @@ AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
                            'social_core.backends.facebook.FacebookOAuth2',
                            'social_core.backends.google.GoogleOAuth2',]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '143232476002-tkoggia9ial9nk25s2n1bg78oo9vtepe.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'pAETlAm1duUUt98REcMfQYtz'
 
 CACHES = {
     'default': {
