@@ -18,7 +18,7 @@
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
-<body style="background-color:#C8C8C8">
+<body style="background-color:black">
     <nav class="navbar navbar-expand-rg bg-dark">
         <div class="container-fluid">
             <ul class="navbar-nav mr-auto">
@@ -87,12 +87,7 @@
 
         {% endblock %}
     </div>
-
-    <footer class=" text-center">
-        <p class="py-3 my-0">
-            © 2021 hiPal
-        </p>
-    </footer>
+    {% include 'partials/footer.html' %}
 
 
     <!-- Optional JavaScript -->

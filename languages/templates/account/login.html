@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-{% extends "secondbase.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 <head>
@@ -26,13 +26,13 @@
     {% block content %}
     <div class="container py-5">
         <div class="py-5">
-            <h2 class="text-center"> Log in</h2>
+            <h2 class="text-center text-light"> Log in</h2>
         </div>
-    <div class="text-center">
+    <div class="text-center ">
         {% if form.errors %}
-        <p>Password or username didn't match. Please enter correct password or username.</p>
+        <p class="text-warning">Password or username didn't match. Please enter correct password or username.</p>
         {% else %}
-        <p>Enter your credentials to sign in to get started:</p>
+        <p class="text-light">Enter your credentials to sign in to get started:</p>
         {% endif %}
         <div class="row">
 
@@ -77,9 +77,5 @@
     </div>
     </div>
     {% endblock %}
-
-
-
 </body>
-
 </html>

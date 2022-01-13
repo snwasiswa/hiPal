@@ -21,11 +21,11 @@
 <body>
     {% block content %}
     <div class="container bg-light main content text-center">
-        <h1>Delete lesson "{{ object.title }}"</h1>
-        <div class="module">
+        <h1 class="title py-3">Delete lesson "{{ object.title }}"</h1>
+        <div class="py-5">
             <form action="" method="post">
                 {% csrf_token %}
-                <p>Are you sure you want to proceed to deletion of "{{ object }}"?</p>
+                <p class="text-danger">Are you sure you want to proceed with the deletion of "{{ object }}"?</p>
                 <button type="submit" class="btn btn-primary">Confirm</button>
             </form>
         </div>

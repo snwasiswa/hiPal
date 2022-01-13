@@ -10,6 +10,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="canonical" href="{{request.path}}" />
 
     <!--Incorporated CSS-->
     <link rel="stylesheet" href="{% static 'languages/styles.css' %}" type="text/css">
@@ -17,18 +18,18 @@
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 
-<body class="bg-dark">
-<!--Photo by <a href="https://unsplash.com/@jaredd_craig?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+<body
+    style="background-image: url({% static 'images/sunset.jpg' %}); background-size: cover;background-attachment: fixed;">
+    <!--Photo by <a href="https://unsplash.com/@jaredd_craig?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
     Jaredd Craig</a> on <a href="https://unsplash.com/s/photos/education?utm_source=unsplash&utm_medium=referral&
     utm_content=creditCopyText">Unsplash</a>
     Photo by <a href="https://unsplash.com/@aaronburden?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
     Aaron Burden</a> on <a href="https://unsplash.com/s/photos/online-education?utm_source=unsplash&utm_medium=
     referral&utm_content=creditCopyText">Unsplash</a>
   -->
-
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light mx-3" href="/home">hiPal</a>
+            <a class="navbar-brand text-primary " style="text-shadow: 4px 4px 5px gray;" href="/">hiPal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -51,7 +52,7 @@
                     <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'logout' %}">Sign out</a>
                     {% else %}
                     <a class="tex-light nav-item mx-3">
-                            Already have an account?
+                        Already have an account?
                     </a>
                     <a class="btn btn-outline-primary mx-3 my-2 my-sm-0" href="{% url 'instructor_login' %}">Sign in</a>
                     {% endif %}
@@ -60,40 +61,39 @@
         </div>
     </nav>
 
-{% block content %}
+    {% block content %}
 
     <div class="container text-light">
-        <div class="py-5 id text-center">
-            <h1 class="title py-3">Welcome to hiPal</h1>
-        </div>
-    <div class="text-light">
-
-        <div class="row">
-
-        <div class="col-sm my-3 pb-5 mx-5 pt-5 text-light " style="width:40%">
-          <h3 class="py-3">For Instructors</h3>
-             <p>Help students gain new skills in your favorite languages</p>
-            <div>
-            <a class="btn btn-primary" href="{% url 'instructor_registration' %}">Sign up</a>
+        <div class="py-5">
+            <div class="py-5 id text-center">
+                <h1 class="title py-3">Welcome to hiPal</h1>
             </div>
         </div>
-        <div class="col-sm my-3 pb-5 mx-5 pt-5 text-light" style="width:40%">
-          <h3 class="py-3">For Students</h3>
-             <p>Join over other students to learn new languages and practice new skills</p>
-            <div>
-            <a class="btn btn-primary" href="{% url 'student_registration' %}">Sign up</a>
+
+        <div class="py-5">
+            <div class="text-light py-5">
+                <div class="row py-5">
+                    <div class="col-sm my-3 pb-5 mx-5 pt-5 text-light " style="width:40%">
+                        <h3 class="py-3">For Instructors</h3>
+                        <p>Help students gain new skills in your favorite languages</p>
+                        <div>
+                            <a class="btn btn-primary" href="{% url 'instructor_registration' %}">Sign up</a>
+                        </div>
+                    </div>
+                    <div class="col-sm my-3 pb-5 mx-5 pt-5 text-light" style="width:40%">
+                        <h3 class="py-3">For Students</h3>
+                        <p>Join over other students to learn new languages and practice new skills</p>
+                        <div>
+                            <a class="btn btn-primary" href="{% url 'student_registration' %}">Sign up</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
-        </div>
-    </div>
     </div>
     {% endblock %}
-
-    <footer class=" text-center">
-        <p class="py-3 my-0">
-            © 2021 hiPal
-        </p>
-    </footer>
+    {% include 'partials/footer.html' %}
 
 
     <!-- Optional JavaScript -->

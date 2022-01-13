@@ -20,17 +20,22 @@
 
 <body>
 {% block content %}
-<div class="container bg-light main content text-center">
+
+<div class="container bg-light">
 
     {% with lesson=unit.lesson %}
-    <h1 class="text-center">Lesson "{{ lesson.title }}"</h1>
-    <div class="content text-center">
-        <h3>Units</h3>
+        <div class="py-5">
+        <h1 class=" title text-center py-3">Lesson "{{ lesson.title }}"</h1>
+        </div>
+
+    <div class="wrapper">
+    <div class="sidebar">
+        <h3 class="text-success py-5">Units</h3>
         <ul id="units">
             {% for u in lesson.units.all %}
             <li data-id="{{ unit.id }}" {% if u == unit %} class="selected" {% endif %}>
                 <a href="{% url 'unit_content_list' u.id %}">
-                    <span>Unit
+                    <span class="text-light">Unit
                         <span class="order">{{ u.order|add:1 }}
                         </span>
                     </span>
@@ -38,19 +43,19 @@
                 </a>
             </li>
             {% empty %}
-            <li>You don't have any units yet.</li>
+            <li class="text-light">You don't have any units yet.</li>
             {% endfor %}
         </ul>
         <div>
             <p>
-                <a href="{% url 'lessons_list' %} ">My Lessons</a>
+                <a class="text-warning" href="{% url 'lessons_list' %} ">My Lessons</a>
             </p>
         </div>
 
     </div>
-    <div class="unit text-center">
-        <h2>Unit {{ unit.order|add:1 }} : {{ unit.title }}</h2>
-        <h3>Unit Contents</h3>
+    <div class="main text-center py-5">
+        <h2 class="text-primary">Unit {{ unit.order|add:1 }} : {{ unit.title }}</h2>
+        <h3 class="py-5">Unit Contents</h3>
         <div id="unit-contents">
             {% for content in unit.contents.all %}
             <div data-id="{{ content.id }}">
@@ -58,24 +63,25 @@
                 <p>
                     {{ item }} ({{ item|model_name }})
                 </p>
-                <a class="btn btn-primary" href="{% url 'update_unit_content' unit.id item|model_name item.id %}">Edit</a>
+                <button class="btn btn-primary mx-5" href="{% url 'update_unit_content' unit.id item|model_name item.id %}">Edit
                 <form action="{% url 'delete_unit_content' content.id %}" method="post">
-                    <button type="submit" class="btn btn-primary">Delete</button>
+                    <button type="submit" class="btn btn-primary mx-5">Delete</button>
                     {% csrf_token %}
-                </form>
+                </form></button>
                 {% endwith %}
             </div>
             {% empty %}
             <p>There are no contents in the unit </p>
             {% endfor %}
         </div>
-        <h3> Add new content</h3>
-        <ul class="content-type">
-            <li><a href="{% url 'create_unit_content' unit.id 'file' %}">File</a></li>
-            <li><a href="{% url 'create_unit_content' unit.id 'text' %}">Text</a></li>
-            <li><a href="{% url 'create_unit_content' unit.id 'video' %}">Video</a></li>
-            <li><a href="{% url 'create_unit_content' unit.id 'image' %}">Image</a></li>
+        <h3 class="py-5"> Add new content</h3>
+        <ul class="py-2">
+            <ul class="text-center"><a class="btn btn-primary mx-3" href="{% url 'create_unit_content' unit.id 'file' %}">File</a>
+            <a class="btn btn-primary mx-3" href="{% url 'create_unit_content' unit.id 'text' %}">Text</a>
+            <a class="btn btn-primary mx-3" href="{% url 'create_unit_content' unit.id 'video' %}">Video</a>
+            <a class="btn btn-primary mx-3" href="{% url 'create_unit_content' unit.id 'image' %}">Image</a></ul>
         </ul>
+    </div>
     </div>
 </div>
     {% endwith %}

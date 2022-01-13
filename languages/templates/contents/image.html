@@ -12,14 +12,14 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{%static 'css/languages.css'%}" type="text/css">
+    <link rel="stylesheet" href="{%static 'languages/styles.css'%}" type="text/css">
     <title>{% block title %} Image Content {% endblock %}</title>
 </head>
 
 <body>
     <div class="container">
      {% block content %}
-     <p><img src="{{ item.file.url }}" class="text-center btn btn-primary" alt="{{ item.title }}">Download File</a></p>
+     <p><img src="{{ item.file.url }}" class="text-center btn btn-primary" alt="{{ item.title }}"></p>
     {% endblock %}
     </div>
 </body>

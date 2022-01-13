@@ -19,15 +19,15 @@
 
 <body>
 {% block content %}
-    <div class="container bg-light">
+    <div class="container bg-light py-5">
 
         {% with language=object.language %}
-        <h1 class="title text-center">
+        <h1 class="title text-center py-3">
             {{ object.title }}
         </h1>
-        <div class="unit text-center">
-            <h2>Lesson Outline</h2>
-            <p>
+        <div class="unit text-center py-5">
+            <h2 class="py-5">Lesson Outline</h2>
+            <p class="py-5">
                <a href="{% url 'lesson_list_language' language.slug %}"> {{ language.title }}</a>
                  {{ object.units.count }} units.
                  Teacher, Instructor, Trainer : {{ object.creator.get_full_name }}
@@ -40,13 +40,18 @@
                 <input type="submit" class="btn btn-primary" value="Enroll Now">
             </form>
             {% else %}
-            <p>
+            <p class="py-5">
                <a href="{% url 'student_registration' %}" class="btn btn-primary">Register to enroll</a> or
                 <a href="{% url 'instructor_login' %}" class="btn btn-primary">
                 Login to enroll
             </a>
             </p>
             {% endif %}
+        <div class="py-5">
+            <div class="py-5">
+
+            </div>
+        </div>
         </div>
        {% endwith %}
 

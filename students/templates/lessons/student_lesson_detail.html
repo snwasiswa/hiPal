@@ -1,49 +1,55 @@
 <!doctype html>
 <html lang="en">
-{% extends 'studentbase.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 <head>
     <title>{% block title %} {{ object.title }}{% endblock %}</title>
 </head>
 
-<body>
     {% block content %}
-    <div class="container bg-light">
-        <div class="py-5">
+            <div class="container bg-secondary">
+
+            <div class="py-5">
             <h1 class="title py-3 text-center">
                 {{ unit.title }}
             </h1>
         </div>
 
+        <div class="wrapper">
 
-        <div class="unit text-center">
-            <h2>Units</h2>
+            <div class="sidebar">
+                  <h2 class="py-5 text-success">Units</h2>
             {% for i in object.units.all %}
             <ul data-id="{{ i.id }}" {% if i == unit %} class="selected" {% endif %}>
                 <a href="{% url 'student_lesson_details_unit' object.id i.id %}">
-                    <span>
-                        Unit <span class="order">{{ i.order|add:1 }}</span>
+                    <span class="text-light">
+                        Unit <span >{{ i.order|add:1 }}</span>
                     </span>
                     <br>{{ i.title }}
                 </a>
             </ul>
             {% empty %}
-            <ul> There are no units yet</ul>
+            <ul class="text-light"> There are no units yet</ul>
+                  <div class="py-5">
+                <div class="py-5">
+                    <div class="py-5">
+                        <p class="py-5"></p>
+                    </div>
+                </div>
+                </div>
             {% endfor %}
             </ul>
-        </div>
-        <div class="unit text-center">
-            {% for content in unit.contents.all %}
+            </div>
+               <div class="main text-center py-5">
+                {% for content in unit.contents.all %}
             {% with i=content.item %}
             <h2>{{ i.title }}</h2>
             {{ i.render }}
             {% endwith %}
             {% endfor %}
+            </div>
         </div>
     </div>
-
     {% endblock %}
-</body>
-
 </html>

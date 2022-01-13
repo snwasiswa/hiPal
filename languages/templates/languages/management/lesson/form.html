@@ -20,21 +20,21 @@
 <body>
     {% block content %}
     <div class="container bg-light main content text-center">
-    <div class="text-center">
+    <div class="text-center py-5">
         {% if object %}
-        <h1>Edit lesson "{{ object.title}}"
+        <h1 class="title py-3">Edit lesson "{{ object.title}}"
             {% else %}
-            Create a new lesson
+            <h1 class="title">Create a new lesson</h1>
             {% endif %}
         </h1>
     </div>
     <div class="text-center" >
-        <h2>Information about lesson</h2>
+        <h2 class="text-primary">Information about lesson</h2>
         <div style=" display:inline-block;">
             <form method="post" style="display:inline-block;">
             {{ form.as_p }}
             {% csrf_token %}
-            <p><input type="submit" class="btn btn-primary" value="Done and Save"></p>
+            <p><input type="submit" class="btn btn-primary" value="Save"></p>
         </form>
         </div>
 

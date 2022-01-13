@@ -17,10 +17,10 @@
     <title>{% block title %}Second Base{% endblock %}</title>
 </head>
 
-<body style="background-color:#C8C8C8">
+<body>
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand text-light mx-3" href="/home">hiPal</a>
+            <a class="navbar-brand text-primary " style="text-shadow: 4px 4px 5px gray;" href="/">hiPal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -59,11 +59,7 @@
         {% endblock %}
     </div>
 
-    <footer class=" text-center">
-        <p class="py-3 my-0">
-            © 2021 hiPal
-        </p>
-    </footer>
+   {% include 'partials/footer.html' %}
 
 
     <!-- Optional JavaScript -->
