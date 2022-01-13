@@ -135,12 +135,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-"""EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'stewartvas01@gmail.com'
-EMAIL_HOST_PASSWORD = 'lavieasesdefauts'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True"""
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
