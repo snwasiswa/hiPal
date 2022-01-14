@@ -141,10 +141,11 @@ USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend',
-                           'languages.authentication.CustomBackendAuthentication',
-                           'social_core.backends.facebook.FacebookOAuth2',
-                           'social_core.backends.google.GoogleOAuth2',]
+AUTHENTICATION_BACKENDS = [ 'django.contrib.auth.backends.ModelBackend',
+                           # 'languages.authentication.CustomBackendAuthentication',
+                           # 'social_core.backends.facebook.FacebookOAuth2',
+                           # 'social_core.backends.google.GoogleOAuth2',
+                           ]
 
 
 CACHES = {
@@ -180,13 +181,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# LOGIN_REDIRECT_URL = reverse_lazy('lessons_list')
-LOGIN_REDIRECT_URL = reverse_lazy('student_lesson_details')
+LOGIN_REDIRECT_URL = reverse_lazy('lesson_list')
+# LOGIN_REDIRECT_URL = reverse_lazy('student_lesson_details')
 # LOGOUT_REDIRECT_URL = 'logout'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 django_on_heroku.settings(locals())

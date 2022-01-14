@@ -13,6 +13,7 @@ from languages.models import Lesson
 from django.views.generic.detail import DetailView
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import StudentRegistrationForm
+from languages.models import Profile
 
 
 # Create your views here.
@@ -65,6 +66,8 @@ def register(request):
             new_student.save()
             group = Group.objects.get(name='Students')
             new_student.groups.add(group)  # Add to student to specific group
+            # Create Profile for new student
+            Profile.objects.create(user=new_student)
 
             return HttpResponseRedirect(reverse_lazy('student_lesson_list'))
 
