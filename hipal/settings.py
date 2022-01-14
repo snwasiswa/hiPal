@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -33,9 +34,9 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
 
-    'students',
-    'languages',
-    'blog',
+    'students.apps.StudentsConfig',
+    'languages.apps.LanguagesConfig',
+    'blog.apps.BlogConfig',
     'embed_video',
     'memcache_status',
     'rest_framework',
