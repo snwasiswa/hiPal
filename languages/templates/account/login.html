@@ -45,13 +45,13 @@
                      <input class="btn btn-primary" type="submit" name="next" value="Log in" />
                 </p>
             </form>
-            <div class="text-center">
+            <!--<div class="text-center">
                   <p>or connect with</p>
                    <p>
                        <i class="fa fa-google text-primary" style="font-size:36px";></i>
                        <a href="{% url 'social:begin' 'google-oauth2' %}">Google</a>
                    </p>
-            </div>
+            </div>-->
 
               <p class="text-left"><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
              <p>Don't have an account?</p>
@@ -68,6 +68,7 @@
                      <input class="btn btn-primary" type="submit" name="next" value="Log in" />
                 </p>
             </form>
+            <p class="text-left"><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
              <p>Don't have an account?</p>
             <div>
             <a class="btn btn-primary" href="{% url 'student_registration' %}">Sign up</a>

@@ -27,16 +27,19 @@
                 <div class="form-inline my-2 my-lg-0 pt-5 text-light">
                     {% if request.user.is_authenticated %}
                     <div class="py-5">
-                        <a class=text-light py-3 mx-3>
+                        <div class="py-5 mx-3">
+                              <a class="text-light py-3">
                             Hello, {{ request.user.first_name }}!
                         </a>
-                        <a class="text-light py-3 mx-3" href="{% url 'edit_profile'%}">
+                        <a class="text-light py-3" href="{% url 'edit_profile'%}">
                             Edit Profile
                             <img src="{{ user.profile.photo.url }} " class="rounded-circle mx-3" alt="image avatar"
                                 style="width: 50px; height: 50px;">
                         </a>
                         <a class="btn btn-outline-primary mx-3 my-2 my-sm-0 text-primary" href="{% url 'logout' %}">Sign
                             out</a>
+                        </div>
+
                     </div>
                     {% else %}
                     <div class="text-light py-5">

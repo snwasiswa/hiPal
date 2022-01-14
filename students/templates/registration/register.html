@@ -30,8 +30,8 @@
               <p class="text-center text-light">Please fill out the registration form to get started</p>
 
               <form method="post" class="py-3">
-                <div style="width:70%; display:inline-block">
-                  <div style="width:50%; overflow:auto" class="py-3">
+                <div style="width:100%; display:inline-block">
+                  <div style="width:100%; overflow:auto" class="py-3 text-success">
                     {% csrf_token %}
                     {{ student_form.as_p }}
                   </div>

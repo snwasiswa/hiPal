@@ -13,23 +13,23 @@
 <body>
     {% block content %}
     <div class="container bg-light main content text-center">
-        <h1 class="title my-3">Lessons List</h1>
+        <h1 class="title my-3 py-3 ">Lessons List</h1>
         <div>
             {% for lesson in object_list %}
-            <div class="info-lesson">
+            <div class="py-5">
                 <h3>{{ lesson.title }}</h3>
                 <p>
-                    <a class="btn btn-primary " href="{% url 'update_lesson' lesson.id %}">Update</a>
-                    <a class="btn btn-primary " href="{% url 'delete_lesson' lesson.id %}">Delete</a>
-                    <a class="btn btn-primary " href="{% url 'lessons_units' lesson.id %}">Edit Units</a>
+                    <a class="btn btn-primary mx-3" href="{% url 'update_lesson' lesson.id %}">Update</a>
+                    <a class="btn btn-primary mx-3" href="{% url 'delete_lesson' lesson.id %}">Delete</a>
+                    <a class="btn btn-primary mx-3" href="{% url 'lessons_units' lesson.id %}">Edit Units</a>
                     {% if lesson.units.count > 0 %}
-                    <a class="btn btn-primary" href="{% url 'unit_content_list' lesson.units.first.id %}">Units
+                    <a class="btn btn-primary mx-3" href="{% url 'unit_content_list' lesson.units.first.id %}">Units
                         Management</a>
                     {% endif %}
                 </p>
             </div>
             {% empty %}
-            <p>You don't have any created lessons</p>
+            <p class="py-5">You don't have any created lessons</p>
             {% endfor %}
             <p>
                 <a href="{% url 'add_lesson' %}" class="btn btn-primary">Add new lesson</a>
