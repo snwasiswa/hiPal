@@ -47,7 +47,7 @@
                     {% for lang in languages %}
                 <ul {% if language == lang %} class="" {% endif %}>
                     <a href="{% url 'lesson_list_language' lang.slug %}" style="font-size:28px">
-                        <img src="{{ skill.get_logo_url }} " class="rounded-circle mr-4" alt="image logo" style="width: 50px; height: 50px;">
+                        <img src="{{ lang.get_logo_url }} " class="rounded-circle mr-4" alt="image logo" style="width: 50px; height: 50px;">
                         {{ lang.title }}</a>
                     <br><br><span class="text-light">{{ lang.total_lessons }} lessons</span>
                 </ul>
