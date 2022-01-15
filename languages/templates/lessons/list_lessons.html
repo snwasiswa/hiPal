@@ -42,15 +42,17 @@
         <div class="wrapper">
 
             <div class="sidebar">
-                <h2 class="text-light">Languages</h2>
+                <h2 class="text-light py-5">Languages</h2>
                 <p id="units">
                     {% for lang in languages %}
-                <ul {% if language == lang %} class="selected" {% endif %}>
-                    <a href="{% url 'lesson_list_language' lang.slug %}" style="font-size:28px"> {{ lang.title }}</a>
-                    <br><span class="text-light">{{ lang.total_lessons }} lessons</span>
+                <ul {% if language == lang %} class="" {% endif %}>
+                    <a href="{% url 'lesson_list_language' lang.slug %}" style="font-size:28px">
+                        <img src="{{ skill.get_logo_url }} " class="rounded-circle mr-4" alt="image logo" style="width: 50px; height: 50px;">
+                        {{ lang.title }}</a>
+                    <br><br><span class="text-light">{{ lang.total_lessons }} lessons</span>
                 </ul>
                 {% endfor %}
-                <ul {% if not language %} class="selected" {% endif %}>
+                <ul {% if not language %} class="py-5" {% endif %}>
                     <a href="{% url 'lesson_list' %}" class="text-secondary" style="font-size:28px">All Contents</a>
                 </ul>
                 </p>
