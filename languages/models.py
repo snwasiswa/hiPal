@@ -12,6 +12,7 @@ class Language(models.Model):
     """Model to describe language of choice"""
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
+    image = models.ImageField(blank=True, null=True, upload_to="logos")
 
     class Meta:
         app_label = 'languages'
@@ -19,6 +20,13 @@ class Language(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def get_logo_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        else:
+            return "https://res.cloudinary.com/dh13i9dce/image/upload/v1642216413/media/logos/default-thumb_dn1xzg.png"
 
 
 class Lesson(models.Model):
