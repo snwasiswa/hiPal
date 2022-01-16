@@ -27,9 +27,9 @@
 <body>
 
      {% block content %}
-    <div class="container bg-light maincontent text-center">
-        <div>
-        <h1>
+    <div class="container bg-light text-center">
+        <div class="py-5">
+        <h1 class="title py-3">
             {% if object %}
             Edit "{{ object.title }}"
             {% else %}
@@ -38,14 +38,23 @@
         </h1>
         </div>
         <div>
-        <h2>Information about lesson</h2>
-        <form method="post" enctype="multipart/form-data" id="unit-form">
+        <h2 class="py-3 text-primary">Information about lesson</h2>
+        <form method="post" enctype="multipart/form-data" class="py-3">
             {{ form.as_p }}
             {% csrf_token %}
             <button type="submit" class="btn btn-primary">Done and Save</button>
         </form>
+            <div class="py-5">
+         <div class="py-5">
+             <div class="py-5">
+                 <div class="py-5"><div class="py-5">
+                 </div></div>
+             </div>
+         </div>
+     </div>
         </div>
     </div>
+
     {% endblock %}
 
 

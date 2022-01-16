@@ -1,27 +1,12 @@
-<!doctype html>
-<html lang="en">
-{% load static %}
+{% load embed_video_tags %}
+{% load cloudinary %}
 
-<head>
-        <!-- Required meta templatetags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{%static 'css/languages.css'%}" type="text/css">
-    <title>{% block title %} Video Content {% endblock %}</title>
-</head>
-
-<body>
-<div class="container">
+<title>{% block title %} Video Content {% endblock %}</title>
+<div class="container py-5">
      {% block content %}
-      {% load embed_video_tags %}
-      {% video item.url "small" %}
+      <video width="700px" height="500px" controls>
+          <source src="{{ item.video.url }}" type="video/mp4">
+      </video>
     {% endblock %}
 </div>
-</body>
-</html>

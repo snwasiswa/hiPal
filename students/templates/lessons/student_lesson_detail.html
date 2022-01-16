@@ -41,15 +41,27 @@
             {% endfor %}
             </ul>
             </div>
-               <div class="main text-center py-5">
-                {% for content in unit.contents.all %}
+               <div class="bg-secondary py-5 mx-3">
+                   <div class="bg-dark py-5 mx-5">
+                           {% for content in unit.contents.all %}
             {% with i=content.item %}
-            <h2>{{ i.title }}</h2>
-            {{ i.render }}
+            <h2 class="text-center text-light py-5">{{ i.title }}</h2>
+            <div class="mx-5 bg-light">{{ i.render }}</div>
             {% endwith %}
             {% endfor %}
+                   </div>
             </div>
+
         </div>
+                  <div class="py-5">
+                <div class="py-5">
+                    <div class="py-5">
+                        <div class="py-5">
+                            <div class="py-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
     {% endblock %}
 </html>

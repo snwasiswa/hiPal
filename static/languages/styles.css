@@ -93,10 +93,11 @@ navbar-brand{
 
   .main {
     width: 80%;
-    height: 150vh;
+    height: auto;
     border: none;
     transition: margin-left .5s;
     padding: 20 px;
+    overflow: auto;
 
   }
 /* Updates styles when the size of the screen is below 450px */
