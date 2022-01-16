@@ -1,3 +1,4 @@
+import magic
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -5,6 +6,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.template.loader import render_to_string
 from .fields import OrderOfField
 from django.conf import settings
+from cloudinary.models import CloudinaryField
+from cloudinary_storage.storage import MediaCloudinaryStorage, VideoMediaCloudinaryStorage, RawMediaCloudinaryStorage
+from cloudinary_storage.validators import validate_video
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -98,23 +103,26 @@ class BaseModel(models.Model):
 
 class Text(BaseModel):
     """The Text model has its own fields"""
-    content = models.TextField()
+    content = RichTextField(blank=True, default=None, null=True)
 
 
 class File(BaseModel):
     """This is the model for a file"""
-    file = models.FileField(upload_to='files')
+    file = models.FileField(upload_to='files', blank=True, default=None, null=True,
+                            storage=RawMediaCloudinaryStorage())
 
 
 class Image(BaseModel):
     """This is the model for a picture"""
-    picture = models.FileField(upload_to='images')
+    picture = models.ImageField(upload_to='images', blank=True, default=None, null=True,
+                                storage=MediaCloudinaryStorage())
 
 
 class Video(BaseModel):
     """This is the model for a video"""
-    file = models.FileField(upload_to='videos')
-    url = models.URLField()
+    video = models.FileField(upload_to="videos", blank=True, default=None, null=True,
+                              storage=VideoMediaCloudinaryStorage(), validators=[validate_video])
+    url = models.URLField(blank=True, default=None, null=True)
 
 
 class Profile(models.Model):
@@ -123,3 +131,10 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'Profile for user {self.user.username}'
+
+    @property
+    def get_avatar_url(self):
+        if self.photo and hasattr(self.photo, 'url'):
+            return self.photo.url
+        else:
+            return "https://res.cloudinary.com/dh13i9dce/image/upload/v1642216377/media/avatars/defaultprofile_vad1ub.png"
