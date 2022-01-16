@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'social_django',
     'django_extensions',
     'channels',
+    'ckeditor',
     'django.contrib.postgres',
     'django.contrib.sites',
     'django.contrib.sitemaps',
