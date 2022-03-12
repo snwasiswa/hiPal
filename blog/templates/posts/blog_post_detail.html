@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends "blogbase.html" %}
+{% load django_bootstrap5 %}
 {% load static %}
 {% load blog_tags %}
 
@@ -50,7 +51,7 @@
         {% else %}
         <h2>Add a new comment</h2>
         <form method="post">
-            {{ post_comment_form.as_p }}
+            {% bootstrap_form post_comment_form %}
             {% csrf_token %}
             <button type="submit" value="Send e-mail">Add comment</button>
         </form>

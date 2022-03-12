@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends "blogbase.html" %}
+{% load django_bootstrap5 %}
 {% load static %}
 
 <head>
@@ -30,7 +31,7 @@
         {% else %}
         <h1>Share Post "{{ blog_post.title }}" by e-mail</h1>
         <form method="post">
-            {{ form.as_ul }}
+            {% bootstrap_form form %}
             {% csrf_token %}
             <button type="submit" value="Send e-mail">Send e-mail</button>
         </form>

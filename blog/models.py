@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -52,7 +53,7 @@ class Comment(models.Model):
     """Model for the comments on posts"""
     blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=100)
-    body = models.TextField()
+    body = RichTextField()
     email = models.EmailField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

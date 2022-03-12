@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
 {% extends "base.html" %}
-{% load static %}
+{% load django_bootstrap5 %}
 
-<head>
-        <!-- Required meta templatetags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-    <!--Incorporated CSS-->
-    <link rel="stylesheet" href="{% static 'languages/styles.css' %}" type="text/css">meta charset="UTF-8">
     <title>{% block title %}
         {% if object %}
         Edit "{{ object.title }}"
@@ -22,9 +9,6 @@
         {% endif %}
         {% endblock %}
     </title>
-</head>
-
-<body>
 
      {% block content %}
     <div class="container bg-light text-center">
@@ -40,7 +24,8 @@
         <div>
         <h2 class="py-3 text-primary">Information about lesson</h2>
         <form method="post" enctype="multipart/form-data" class="py-3">
-            {{ form.as_p }}
+            {% bootstrap_form form.media %}
+            {% bootstrap_form form %}
             {% csrf_token %}
             <button type="submit" class="btn btn-primary">Done and Save</button>
         </form>
@@ -54,10 +39,4 @@
      </div>
         </div>
     </div>
-
     {% endblock %}
-
-
-</body>
-
-</html>

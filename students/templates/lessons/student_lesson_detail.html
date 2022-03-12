@@ -1,11 +1,7 @@
-<!doctype html>
-<html lang="en">
 {% extends 'base.html' %}
 {% load static %}
 
-<head>
     <title>{% block title %} {{ object.title }}{% endblock %}</title>
-</head>
 
     {% block content %}
             <div class="container bg-secondary">
@@ -15,9 +11,7 @@
                 {{ unit.title }}
             </h1>
         </div>
-
         <div class="wrapper">
-
             <div class="sidebar">
                   <h2 class="py-5 text-success">Units</h2>
             {% for i in object.units.all %}
@@ -44,14 +38,14 @@
                <div class="bg-secondary py-5 mx-3">
                    <div class="bg-dark py-5 mx-5">
                            {% for content in unit.contents.all %}
-            {% with i=content.item %}
-            <h2 class="text-center text-light py-5">{{ i.title }}</h2>
-            <div class="mx-5 bg-light">{{ i.render }}</div>
-            {% endwith %}
+
+            <h2 class="text-center text-light py-5">{{ content.item.title }}</h2>
+            <div class="mx-5 bg-light">{{ content.item.render|safe }}
+            </div>
+
             {% endfor %}
                    </div>
             </div>
-
         </div>
                   <div class="py-5">
                 <div class="py-5">
@@ -64,4 +58,3 @@
             </div>
     </div>
     {% endblock %}
-</html>
