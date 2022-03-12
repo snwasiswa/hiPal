@@ -14,6 +14,7 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import StudentRegistrationForm
 from languages.models import Profile
+from django.contrib import messages
 
 
 # Create your views here.
@@ -31,8 +32,10 @@ def student_login_view(request):
                     return redirect('student_lesson_list')
 
                 else:
+                    messages.info(request, 'You account has been disabled')
                     return HttpResponse('Disabled account')
             else:
+                messages.info(request, 'Your credentials are invalid')
                 return HttpResponse('Invalid login')
     else:
         form = StudentLoginForm()
@@ -68,7 +71,8 @@ def register(request):
             new_student.groups.add(group)  # Add to student to specific group
             # Create Profile for new student
             Profile.objects.create(user=new_student)
-
+            login(request, new_student)
+            messages.success(request, 'Welcome! Your account has been successfully created')
             return HttpResponseRedirect(reverse_lazy('student_lesson_list'))
 
             # return render(request, 'registration/instructor_registration.html', {'new_student': new_student})

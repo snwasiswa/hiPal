@@ -19,6 +19,7 @@ from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.core.cache import cache
 from .forms import InstructorRegistrationForm, UserProfileForm, UserForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -275,10 +276,13 @@ def instructor_login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    messages.success(request, "Welcome back!")
                     return redirect('lessons_list')
                 else:
+                    messages.info(request, 'You account has been disabled')
                     return HttpResponse('Disabled account')
             else:
+                messages.info(request, 'Your credentials are invalid')
                 return HttpResponse('Invalid login')
     else:
         form = InstructorLoginForm()
@@ -301,6 +305,7 @@ def instructor_registration(request):
             Profile.objects.create(user=new_instructor)
 
             login(request, new_instructor)
+            messages.success(request, 'Welcome! Your account has been successfully created')
 
             return HttpResponseRedirect(reverse_lazy('lessons_list'))
 
@@ -314,6 +319,7 @@ def custom_logout_view(request):
     """Custom Log out request"""
 
     logout(request)
+    messages.success(request, 'You have successfully logged out from hiPal')
     return render(request, 'registration/logout.html')
 
 
