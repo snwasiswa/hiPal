@@ -3,6 +3,7 @@ async-generator==1.10
 attrs==21.4.0
 autobahn==21.11.1
 Automat==20.2.0
+beautifulsoup4==4.10.0
 certifi==2021.10.8
 cffi==1.15.0
 channels==3.0.4
@@ -14,6 +15,7 @@ daphne==3.0.2
 defusedxml==0.7.1
 dj-database-url==0.5.0
 Django==4.0.1
+django-bootstrap5==21.3
 django-braces==1.15.0
 django-ckeditor==6.2.0
 django-cloudinary-storage==0.3.0
@@ -55,6 +57,7 @@ sniffio==1.2.0
 social-auth-app-django==5.0.0
 social-auth-core==4.1.0
 sortedcontainers==2.4.0
+soupsieve==2.3.1
 sqlparse==0.4.2
 tokenize-rt==4.2.1
 trio==0.19.0
